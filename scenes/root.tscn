@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=8 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
 [ext_resource type="PackedScene" uid="uid://clgwpwrjnay6g" path="res://scenes/player_stats.tscn" id="2_f1wp3"]
+[ext_resource type="PackedScene" uid="uid://0m5v214t2sqc" path="res://scenes/shiba_inu.tscn" id="3_qr0pw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05yih"]
+size = Vector2(1126, 621)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8s68g"]
 font_size = 24
@@ -13,6 +17,14 @@ font_size = 32
 font_size = 78
 
 [node name="Root" type="Node2D"]
+
+[node name="NavigableArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigableArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_05yih")
 
 [node name="Background" type="ColorRect" parent="."]
 offset_left = -576.0
@@ -26,6 +38,18 @@ color = Color(0.180005, 0.180005, 0.180005, 1)
 
 [node name="ClickableTreat" parent="." node_paths=PackedStringArray("player_stats") instance=ExtResource("1_osj1l")]
 player_stats = NodePath("../GameManager/PlayerStats")
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="GameManager" type="Node" parent="."]
+
+[node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("creature_score_label", "treats_label") instance=ExtResource("2_f1wp3")]
+creature_score_label = NodePath("../../UI/CreatureScoreNumber")
+treats_label = NodePath("../../UI/TreatsLabel")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_qr0pw")]
+visible = false
+position = Vector2(-294, -140)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -61,11 +85,3 @@ offset_bottom = -177.0
 text = "0"
 label_settings = SubResource("LabelSettings_l8j6x")
 horizontal_alignment = 1
-
-[node name="UICanvas" type="CanvasLayer" parent="."]
-
-[node name="GameManager" type="Node" parent="."]
-
-[node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("creature_score_label", "treats_label") instance=ExtResource("2_f1wp3")]
-creature_score_label = NodePath("../../UI/CreatureScoreNumber")
-treats_label = NodePath("../../UI/TreatsLabel")
