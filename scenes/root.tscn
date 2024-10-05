@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfa5k0eld51ts"]
+
+[ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
+[ext_resource type="PackedScene" uid="uid://clgwpwrjnay6g" path="res://scenes/player_stats.tscn" id="2_f1wp3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8s68g"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_iuwn5"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8j6x"]
+font_size = 78
+
+[node name="Root" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+mouse_filter = 2
+color = Color(0.180005, 0.180005, 0.180005, 1)
+
+[node name="Viewport" type="Camera2D" parent="."]
+
+[node name="ClickableTreat" parent="." node_paths=PackedStringArray("player_stats") instance=ExtResource("1_osj1l")]
+player_stats = NodePath("../GameManager/PlayerStats")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TreatsLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 468.0
+offset_top = -318.0
+offset_right = 567.0
+offset_bottom = -284.0
+text = "Treats: 0"
+label_settings = SubResource("LabelSettings_8s68g")
+horizontal_alignment = 2
+
+[node name="CreatureScoreLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = -119.0
+offset_top = -316.0
+offset_right = 120.0
+offset_bottom = -271.0
+text = "Creature Score:"
+label_settings = SubResource("LabelSettings_iuwn5")
+
+[node name="CreatureScoreNumber" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -284.0
+offset_right = 23.0
+offset_bottom = -177.0
+text = "0"
+label_settings = SubResource("LabelSettings_l8j6x")
+horizontal_alignment = 1
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="GameManager" type="Node" parent="."]
+
+[node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("creature_score_label", "treats_label") instance=ExtResource("2_f1wp3")]
+creature_score_label = NodePath("../../UI/CreatureScoreNumber")
+treats_label = NodePath("../../UI/TreatsLabel")
