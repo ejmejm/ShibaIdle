@@ -18,6 +18,8 @@ extends Node
 	get:
 		return n_treats
 
+@export var max_inu_count: int = 5
+
 @export_category("UI Components")
 @export var creature_score_label: Label
 @export var treats_label: Label
@@ -44,11 +46,7 @@ func update_treats_ui():
 func treat_update_actions():
 	# If treats >= 5, spawn a new shiba inu and reset the treats
 	# Update the creature score when adding a new shiba inu
-	pass
 	if n_treats >= 5:
-		var inu: CharacterBody2D = shiba_inu_resource.instantiate()
-		$"/root/Root".add_child(inu)
-		inu.position = inu.choose_random_spot()
-		creature_score += 1
-		n_treats = 0
+		$"../Spawner".spawn_inu("shiba_inu")
+		n_treats -= 5
 	
