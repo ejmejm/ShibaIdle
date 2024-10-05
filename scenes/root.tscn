@@ -18,6 +18,7 @@ font_size = 32
 font_size = 78
 
 [node name="Root" type="Node2D"]
+position = Vector2(576, 324)
 
 [node name="NavigableArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -34,6 +35,7 @@ offset_right = 576.0
 offset_bottom = 324.0
 mouse_filter = 2
 color = Color(0.180005, 0.180005, 0.180005, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Viewport" type="Camera2D" parent="."]
 
@@ -49,8 +51,8 @@ position = Vector2(-294, -140)
 [node name="GameManager" type="Node" parent="."]
 
 [node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("creature_score_label", "treats_label") instance=ExtResource("2_f1wp3")]
-creature_score_label = NodePath("../../UI/CreatureScoreNumber")
-treats_label = NodePath("../../UI/TreatsLabel")
+creature_score_label = NodePath("../../UICanvas/UI/CreatureScoreNumber")
+treats_label = NodePath("../../UICanvas/UI/TreatsLabel")
 
 [node name="Spawner" type="Node" parent="GameManager" node_paths=PackedStringArray("spawn_container", "player_stats")]
 script = ExtResource("3_m3s0q")
@@ -58,14 +60,18 @@ spawn_container = NodePath("../../InuContainer")
 player_stats = NodePath("../PlayerStats")
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
+layer = 5
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="UICanvas"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 616.0
+offset_bottom = 364.0
+metadata/_edit_use_anchors_ = true
 
-[node name="TreatsLabel" type="Label" parent="UI"]
+[node name="TreatsLabel" type="Label" parent="UICanvas/UI"]
 layout_mode = 0
 offset_left = 468.0
 offset_top = -318.0
@@ -74,8 +80,9 @@ offset_bottom = -284.0
 text = "Treats: 0"
 label_settings = SubResource("LabelSettings_8s68g")
 horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="CreatureScoreLabel" type="Label" parent="UI"]
+[node name="CreatureScoreLabel" type="Label" parent="UICanvas/UI"]
 layout_mode = 0
 offset_left = -119.0
 offset_top = -316.0
@@ -83,8 +90,9 @@ offset_right = 120.0
 offset_bottom = -271.0
 text = "Creature Score:"
 label_settings = SubResource("LabelSettings_iuwn5")
+metadata/_edit_use_anchors_ = true
 
-[node name="CreatureScoreNumber" type="Label" parent="UI"]
+[node name="CreatureScoreNumber" type="Label" parent="UICanvas/UI"]
 layout_mode = 0
 offset_left = -22.0
 offset_top = -284.0
@@ -93,3 +101,4 @@ offset_bottom = -177.0
 text = "0"
 label_settings = SubResource("LabelSettings_l8j6x")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
