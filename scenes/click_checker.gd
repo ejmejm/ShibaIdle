@@ -1,3 +1,4 @@
+class_name CollidableTreat
 extends Node2D
 
 

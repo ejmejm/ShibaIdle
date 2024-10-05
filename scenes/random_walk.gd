@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
 
+const PLAYER_STATS_PATH: String = "/root/Root/GameManager/PlayerStats"
+const BOUNDING_BOX_PATH: String = "/root/Root/NavigableArea/CollisionShape2D"
+const TARGET_EQ_THRESHOLD: int = 5
+
 @export var should_walk: bool = true
 @export var stop_duration_range: Vector2 = Vector2(1, 3) # Range for random stop duration
 @export var bounding_box_shape: CollisionShape2D # CollisionShape2D used for bounding box
-
 
 var target_position: Vector2
 var is_stopping: bool = false
@@ -13,14 +16,16 @@ var player_stats: PlayerStats
 
 
 func _ready():
-	print("READY INU")
+	# Get player stats so that inu can increase score on collision
+	player_stats = get_node_or_null(PLAYER_STATS_PATH)
+	if player_stats == null:
+		push_error("PlayerStats could not be found at !")
+		
 	# If bounding_box_shape is not assigned, try to find it in the scene tree
 	if bounding_box_shape == null:
-		bounding_box_shape = $"/root/Root/NavigableArea/CollisionShape2D"
-		
+		bounding_box_shape = get_node_or_null(BOUNDING_BOX_PATH)
 		if bounding_box_shape == null:
 			push_error("No default CollisionShape2D found, please assign one manually.")
-			return
 
 	# Extract bounding box Rect2 from the CollisionShape2D's RectangleShape2D
 	if bounding_box_shape and bounding_box_shape.shape is RectangleShape2D:
@@ -28,8 +33,6 @@ func _ready():
 		bounding_box = Rect2(bounding_box_shape.global_position - rect_shape.extents, rect_shape.extents * 2)
 	else:
 		push_error("Bounding box shape must be a RectangleShape2D!")
-	
-	
 
 	set_physics_process(should_walk)
 
@@ -44,7 +47,7 @@ func _physics_process(delta):
 		move_towards_target()
 
 		# Check if reached target or collided
-		if global_position.distance_to(target_position) < 5 or is_on_wall():
+		if global_position.distance_to(target_position) <= TARGET_EQ_THRESHOLD:
 			stop_movement()
 
 
@@ -56,11 +59,23 @@ func choose_random_spot() -> Vector2:
 	)
 
 
+func give_collision_treats(collision: KinematicCollision2D):
+	var collider := collision.get_collider()
+	if collider is Node2D and (collider as Node2D).get_parent() is CollidableTreat:
+		var collidable_treat: CollidableTreat = (collider as Node2D).get_parent()
+		player_stats.n_treats += collidable_treat.treat_give_count
+
+
 func move_towards_target():
 	# Move towards the target position with constant speed
 	var direction = (target_position - global_position).normalized()
 	velocity = direction * 100  # Adjust speed as needed
 	move_and_slide()
+	
+	if get_slide_collision_count() > 0:
+		stop_movement()
+		var collision := get_slide_collision(0)
+		give_collision_treats(collision)
 
 
 func stop_movement():
