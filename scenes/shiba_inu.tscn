@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://0m5v214t2sqc"]
 
 [ext_resource type="Texture2D" uid="uid://dyestbkxs8hw4" path="res://tmp_sprites/shiba_sprite.png" id="1_648j0"]
-[ext_resource type="Script" path="res://scenes/random_walk.gd" id="1_boois"]
+[ext_resource type="Script" path="res://scripts/random_walk.gd" id="1_boois"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qljsk"]
 radius = 12.0357
