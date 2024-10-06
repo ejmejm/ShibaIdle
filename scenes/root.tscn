@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=14 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
 [ext_resource type="PackedScene" uid="uid://clgwpwrjnay6g" path="res://scenes/player_stats.tscn" id="2_f1wp3"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://0m5v214t2sqc" path="res://scenes/shiba_inu.tscn" id="3_qr0pw"]
 [ext_resource type="Script" path="res://scripts/upgrades_manager.gd" id="5_khuaw"]
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
+[ext_resource type="Script" path="res://scenes/update_creature_count.gd" id="6_xiik3"]
+[ext_resource type="Script" path="res://scenes/max_creature_count_update.gd" id="7_sectu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05yih"]
 size = Vector2(1126, 621)
@@ -156,6 +158,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_x2tt7")
 vertical_alignment = 1
+script = ExtResource("6_xiik3")
 
 [node name="Divider" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
 layout_mode = 2
@@ -168,6 +171,7 @@ layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_x2tt7")
 vertical_alignment = 1
+script = ExtResource("7_sectu")
 
 [node name="MarginContainer" type="MarginContainer" parent="UICanvas/VBoxContainer"]
 layout_mode = 2
@@ -201,5 +205,8 @@ layout_mode = 2
 wait_time = 0.1
 autostart = true
 
+[connection signal="current_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/CreatureCount" method="_on_player_stats_current_inu_count_update"]
+[connection signal="max_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_player_stats_max_inu_count_update"]
+[connection signal="ready" from="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_ready"]
 [connection signal="ready" from="UICanvas/VBoxContainer/UpgradesPanel" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_ready"]
 [connection signal="timeout" from="UICanvas/VBoxContainer/UpgradesPanel/UpgradesUpdateTimer" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_update_timer"]
