@@ -1,26 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=12 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
 [ext_resource type="PackedScene" uid="uid://clgwpwrjnay6g" path="res://scenes/player_stats.tscn" id="2_f1wp3"]
-[ext_resource type="Script" path="res://scenes/spawner.gd" id="3_m3s0q"]
+[ext_resource type="Script" path="res://scripts/spawner.gd" id="3_m3s0q"]
 [ext_resource type="PackedScene" uid="uid://0m5v214t2sqc" path="res://scenes/shiba_inu.tscn" id="3_qr0pw"]
+[ext_resource type="Script" path="res://scripts/upgrades_manager.gd" id="5_khuaw"]
+[ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05yih"]
 size = Vector2(1126, 621)
 
-[sub_resource type="LabelSettings" id="LabelSettings_8s68g"]
-font_size = 24
-
 [sub_resource type="LabelSettings" id="LabelSettings_iuwn5"]
-font_size = 32
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_l8j6x"]
 font_size = 78
+
+[sub_resource type="LabelSettings" id="LabelSettings_sns6y"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_x2tt7"]
+font_size = 21
 
 [node name="Root" type="Node2D"]
 position = Vector2(576, 324)
 
 [node name="NavigableArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 0
 
@@ -43,62 +49,157 @@ metadata/_edit_use_anchors_ = true
 player_stats = NodePath("../GameManager/PlayerStats")
 
 [node name="InuContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CharacterBody2D" parent="InuContainer" instance=ExtResource("3_qr0pw")]
-visible = false
 position = Vector2(-294, -140)
 
 [node name="GameManager" type="Node" parent="."]
 
-[node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("creature_score_label", "treats_label") instance=ExtResource("2_f1wp3")]
-creature_score_label = NodePath("../../UICanvas/UI/CreatureScoreNumber")
-treats_label = NodePath("../../UICanvas/UI/TreatsLabel")
+[node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("treats_score_label") instance=ExtResource("2_f1wp3")]
+unique_name_in_owner = true
+treats_score_label = NodePath("../../UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/TreatsCountLabel")
 
-[node name="Spawner" type="Node" parent="GameManager" node_paths=PackedStringArray("spawn_container", "player_stats")]
+[node name="Spawner" type="Node" parent="GameManager"]
+unique_name_in_owner = true
 script = ExtResource("3_m3s0q")
-spawn_container = NodePath("../../InuContainer")
-player_stats = NodePath("../PlayerStats")
+
+[node name="UpgradesManager" type="Node" parent="GameManager"]
+unique_name_in_owner = true
+script = ExtResource("5_khuaw")
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="UI" type="Control" parent="UICanvas"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 576.0
-offset_top = 324.0
-offset_right = 616.0
-offset_bottom = 364.0
-metadata/_edit_use_anchors_ = true
+[node name="TreatsPanel" type="PanelContainer" parent="UICanvas"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.5
+offset_right = 77.5
+offset_bottom = 107.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
-[node name="TreatsLabel" type="Label" parent="UICanvas/UI"]
-layout_mode = 0
-offset_left = 468.0
-offset_top = -318.0
-offset_right = 567.0
-offset_bottom = -284.0
-text = "Treats: 0"
-label_settings = SubResource("LabelSettings_8s68g")
-horizontal_alignment = 2
-metadata/_edit_use_anchors_ = true
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/TreatsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
 
-[node name="CreatureScoreLabel" type="Label" parent="UICanvas/UI"]
-layout_mode = 0
-offset_left = -119.0
-offset_top = -316.0
-offset_right = 120.0
-offset_bottom = -271.0
-text = "Creature Score:"
+[node name="TreatsHeading" type="GridContainer" parent="UICanvas/TreatsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer"]
+layout_mode = 2
+
+[node name="TreatsLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Treats:"
 label_settings = SubResource("LabelSettings_iuwn5")
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="CreatureScoreNumber" type="Label" parent="UICanvas/UI"]
-layout_mode = 0
-offset_left = -22.0
-offset_top = -284.0
-offset_right = 23.0
-offset_bottom = -177.0
+[node name="TreatsCountLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer"]
+layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_l8j6x")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -129.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="StatsPanel" type="PanelContainer" parent="UICanvas/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/VBoxContainer/StatsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="StatsHeader" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_sns6y")
+horizontal_alignment = 1
+
+[node name="CreatureCountRow" type="HBoxContainer" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CreatureCountLabel" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "Inus: "
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+
+[node name="CreatureCount" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+
+[node name="Divider" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+
+[node name="MaxCreatureCount" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 15
+
+[node name="UpgradesPanel" type="PanelContainer" parent="UICanvas/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("6_pydca")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/VBoxContainer/UpgradesPanel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/VBoxContainer/UpgradesPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="UpgradesHeaderLabel" type="Label" parent="UICanvas/VBoxContainer/UpgradesPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Upgrades"
+label_settings = SubResource("LabelSettings_sns6y")
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="UICanvas/VBoxContainer/UpgradesPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradesUpdateTimer" type="Timer" parent="UICanvas/VBoxContainer/UpgradesPanel"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="ready" from="UICanvas/VBoxContainer/UpgradesPanel" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_ready"]
+[connection signal="timeout" from="UICanvas/VBoxContainer/UpgradesPanel/UpgradesUpdateTimer" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_update_timer"]
