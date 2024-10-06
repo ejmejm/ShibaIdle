@@ -52,6 +52,9 @@ player_stats = NodePath("../GameManager/PlayerStats")
 [node name="InuContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
 
+[node name="BuildingContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="GameManager" type="Node" parent="."]
 
 [node name="Minigames" type="Node" parent="GameManager"]
