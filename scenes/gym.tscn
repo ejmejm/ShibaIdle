@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://fbu5o6p822i2"]
+[gd_scene load_steps=4 format=3 uid="uid://bxxg6tpb5nb08"]
 
 [ext_resource type="Texture2D" uid="uid://m4ldm1hik38g" path="res://sprites/ShibaGym Sprite.jpg" id="1_6bq28"]
 [ext_resource type="Script" path="res://scripts/hit_building.gd" id="1_8sp54"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jq621"]
-size = Vector2(76, 79)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m44pd"]
+size = Vector2(77, 80)
 
-[node name="Gym" type="RigidBody2D"]
+[node name="Gym" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource("1_8sp54")
-metadata/building_type = "gym"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 7.5)
-shape = SubResource("RectangleShape2D_jq621")
+position = Vector2(0.5, 7)
+shape = SubResource("RectangleShape2D_m44pd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6bq28")

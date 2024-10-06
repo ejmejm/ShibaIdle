@@ -34,7 +34,7 @@ func spawn_building(building_type: String):
 		push_error("
 		Building type '%s' cannot be spawned because that building does not exist" % building_type)
 		
-	var building: RigidBody2D = BUILDING_RESOURCES[building_type].instatiate()
+	var building: StaticBody2D = BUILDING_RESOURCES[building_type].instatiate()
 	building.visible = false
 	building_container.add_child(building)
 	building.position = building.choose_open_spot()

@@ -1,7 +1,6 @@
 class_name BuyGymUpgrade
 extends BaseUpgrade
 
-
 var spawner: SpawnManager
 
 
