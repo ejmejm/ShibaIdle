@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
 [ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
 [ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
-[ext_resource type="PackedScene" path="res://scenes/ball.tscn" id="9_rdu7f"]
+[ext_resource type="PackedScene" uid="uid://bh8uegvyvlaad" path="res://scenes/ball.tscn" id="9_rdu7f"]
 [ext_resource type="Script" path="res://scenes/progress_bar.gd" id="10_0ld48"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hh8vk"]

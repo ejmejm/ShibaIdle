@@ -1,3 +1,4 @@
+class_name BallController
 extends RigidBody2D
 
 
@@ -7,6 +8,7 @@ signal rolled
 var follow_cursor := false
 var last_mouse_position := Vector2.ZERO
 var time_since_release := 0.0
+var attraction_radius := 150.0
 
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
@@ -44,8 +46,8 @@ func _physics_process(delta: float) -> void:
 		
 		# Emit signal every 100ms while rolling
 		time_since_release += delta
-		if time_since_release >= 0.1:
-			emit_signal("rolled", global_position)
+		if time_since_release >= 0.1 and linear_velocity.length() >= 20:
+			emit_signal("rolled", global_position, attraction_radius)
 			time_since_release -= 0.1
 	
 	# Apply angular velocity based on linear velocity

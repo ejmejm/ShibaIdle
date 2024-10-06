@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 const PLAYER_STATS_PATH: String = "/root/Root/GameManager/PlayerStats"
 const BOUNDING_BOX_PATH: String = "/root/Root/NavigableArea/CollisionShape2D"
+const BALL_PATH: String = "/root/Root/ItemContainer/%Ball"
 const TARGET_EQ_THRESHOLD: int = 5
 
 @export var should_walk: bool = true
@@ -13,14 +14,21 @@ const TARGET_EQ_THRESHOLD: int = 5
 var target_position: Vector2
 var is_stopping: bool = false
 var bounding_box: Rect2
+var ball: BallController
 var player_stats: PlayerStats
 @onready var inu_stats: InuStats = %InuStats
 
+
 func _ready():
 	# Get player stats so that inu can increase score on collision
-	player_stats = get_node_or_null(PLAYER_STATS_PATH)
+	player_stats = get_node(PLAYER_STATS_PATH) 
 	if player_stats == null:
-		push_error("PlayerStats could not be found at !")
+		push_error("PlayerStats could not be found!")
+		
+	# Connect ball movement signal
+	var ball_parent: Node = get_node(BALL_PATH)
+	ball = ball_parent.get_child(0)
+	ball.rolled.connect(_on_ball_rolled)
 		
 	# If bounding_box_shape is not assigned, try to find it in the scene tree
 	if bounding_box_shape == null:
@@ -36,6 +44,15 @@ func _ready():
 		push_error("Bounding box shape must be a RectangleShape2D!")
 
 	set_physics_process(should_walk)
+
+
+func _on_ball_rolled(location: Vector2, radius: float):
+	if (global_position - location).length() < radius:
+		is_stopping = false
+		target_position = location + Vector2(
+		randi_range(0, 40),
+		randi_range(0, 40),
+	)
 
 
 func _physics_process(delta):
