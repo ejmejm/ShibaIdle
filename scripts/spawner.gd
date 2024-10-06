@@ -7,8 +7,8 @@ extends Node
 
 
 static var INU_RESOURCES := {
-	"base_shiba_inu": preload("res://scenes/shiba_inu.tscn"),
-	"double_shiba_inu": preload("res://scenes/double_shiba_inu.tscn")
+	"base_shiba_inu": preload("res://inus/shiba_inu.tscn"),
+	"double_shiba_inu": preload("res://inus/double_shiba_inu.tscn")
 }
 
 
