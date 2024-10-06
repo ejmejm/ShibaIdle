@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=21 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="Texture2D" uid="uid://cm0m00dsfw6xv" path="res://tilebg/LDMG.png" id="1_alsf6"]
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
@@ -8,7 +8,8 @@
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
 [ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
 [ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
-[ext_resource type="PackedScene" uid="uid://bh8uegvyvlaad" path="res://scenes/ball.tscn" id="9_rdu7f"]
+[ext_resource type="PackedScene" path="res://scenes/ball.tscn" id="9_rdu7f"]
+[ext_resource type="Script" path="res://scenes/progress_bar.gd" id="10_0ld48"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hh8vk"]
 normal = Vector2(0, 1)
@@ -36,6 +37,9 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_x2tt7"]
 font_size = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tebg3"]
+bg_color = Color(1, 0.150139, 0.368862, 1)
 
 [node name="Root" type="Node2D"]
 position = Vector2(576, 324)
@@ -246,8 +250,31 @@ layout_mode = 2
 wait_time = 0.1
 autostart = true
 
+[node name="ProgressbarContainer" type="PanelContainer" parent="UICanvas"]
+offset_right = 288.0
+offset_bottom = 64.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/ProgressbarContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/ProgressbarContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 2
+shortcut_context = NodePath("../../../../TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/TreatsCountLabel")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tebg3")
+max_value = 1e+06
+script = ExtResource("10_0ld48")
+
+[node name="Label" type="Label" parent="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Road to 1 MIL treats!"
+horizontal_alignment = 1
+
 [connection signal="current_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/CreatureCount" method="_on_player_stats_current_inu_count_update"]
 [connection signal="max_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_player_stats_max_inu_count_update"]
+[connection signal="treat_count_update" from="GameManager/PlayerStats" to="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer/ProgressBar" method="_on_player_stats_treat_count_update"]
 [connection signal="ready" from="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_ready"]
 [connection signal="ready" from="UICanvas/VBoxContainer/UpgradesPanel" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_ready"]
 [connection signal="timeout" from="UICanvas/VBoxContainer/UpgradesPanel/UpgradesUpdateTimer" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_update_timer"]
