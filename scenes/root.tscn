@@ -57,6 +57,7 @@ unique_name_in_owner = true
 [node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("treats_score_label") instance=ExtResource("2_f1wp3")]
 unique_name_in_owner = true
 treats_score_label = NodePath("../../UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/TreatsCountLabel")
+max_inu_capacity = 10
 
 [node name="Spawner" type="Node" parent="GameManager"]
 unique_name_in_owner = true

@@ -8,9 +8,23 @@ var UPGRADE_REGISTRAR := {}
 
 func _ready():
 	UPGRADE_REGISTRAR = {
+		# Inus
 		"buy_shiba_inu": preload("res://upgrades/buy_shiba.gd").new(),
 		"buy_double_shiba_inu": preload("res://upgrades/buy_double_shiba.gd").new(),
-		"gym_upgrade": preload("res://upgrades/gym_upgrade.gd").new()
+		
+		# Buildings
+		"gym_upgrade": preload("res://upgrades/gym_upgrade.gd").new(),
+		
+		# Passives
+		"inu_capacity_1": preload("res://upgrades/inu_capacity_1.gd").new(),
+		"inu_capacity_2": preload("res://upgrades/inu_capacity_2.gd").new(),
+		"inu_capacity_3": preload("res://upgrades/inu_capacity_3.gd").new(),
+		"inu_capacity_4": preload("res://upgrades/inu_capacity_4.gd").new(),
+		"inu_capacity_5": preload("res://upgrades/inu_capacity_5.gd").new(),
+		"inu_capacity_6": preload("res://upgrades/inu_capacity_6.gd").new(),
+		
+		# Debugging (TODO: REMOVE FOR RELEASE!)
+		"debug_treats": preload("res://upgrades/debug_treats.gd").new(),
 	}
 
 	for upgrade: BaseUpgrade in UPGRADE_REGISTRAR.values():

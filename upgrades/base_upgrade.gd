@@ -7,6 +7,7 @@ extends Node
 @export var description: String
 @export var cost: int
 @export var max_purchases: int = -1 # Maximum, number of times this upgrade can be purchased
+@export var treats_to_unlock: int = 0 # Minimum number of treats at which this becomes visible
 
 var player_stats: PlayerStats
 var n_purchases: int = 0 # Number of times this upgrade has been purchased so far
@@ -47,4 +48,5 @@ func is_purchasable() -> bool:
 
 func should_display() -> bool:
 	var has_stock := (max_purchases < 0 or n_purchases < max_purchases)
-	return _should_display_logic() and has_stock
+	var tier_unlocked := player_stats.highest_treats >= treats_to_unlock
+	return _should_display_logic() and has_stock and tier_unlocked

@@ -34,8 +34,11 @@ var n_current_inus: int = 0:
 var n_treats: int = 0:
 	set(val):
 		n_treats = val
+		highest_treats = max(highest_treats, n_treats)
 		treat_count_update.emit(n_treats)
 		update_treats_ui()
+		
+var highest_treats: int = 0
 		
 var upgrade_purchases: Dictionary = {}
 
