@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=14 format=3 uid="uid://bfa5k0eld51ts"]
 
+[ext_resource type="Texture2D" uid="uid://cm0m00dsfw6xv" path="res://tilebg/LDMG.png" id="1_alsf6"]
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
 [ext_resource type="PackedScene" uid="uid://clgwpwrjnay6g" path="res://scenes/player_stats.tscn" id="2_f1wp3"]
 [ext_resource type="Script" path="res://scripts/spawner.gd" id="3_m3s0q"]
@@ -27,7 +28,6 @@ font_size = 21
 position = Vector2(576, 324)
 
 [node name="NavigableArea" type="Area2D" parent="."]
-unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 0
 
@@ -35,13 +35,8 @@ collision_mask = 0
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_05yih")
 
-[node name="Background" type="ColorRect" parent="."]
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
-mouse_filter = 2
-color = Color(0.180005, 0.180005, 0.180005, 1)
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_alsf6")
 metadata/_edit_use_anchors_ = true
 
 [node name="Viewport" type="Camera2D" parent="."]
