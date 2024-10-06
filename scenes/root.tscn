@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=19 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="Texture2D" uid="uid://cm0m00dsfw6xv" path="res://tilebg/LDMG.png" id="1_alsf6"]
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
@@ -8,6 +8,19 @@
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
 [ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
 [ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
+[ext_resource type="PackedScene" uid="uid://bh8uegvyvlaad" path="res://scenes/ball.tscn" id="9_rdu7f"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hh8vk"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h6v8l"]
+distance = 3.06213
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l8fb7"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wnq8r"]
+normal = Vector2(-1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05yih"]
 size = Vector2(1126, 621)
@@ -26,6 +39,26 @@ font_size = 21
 
 [node name="Root" type="Node2D"]
 position = Vector2(576, 324)
+
+[node name="MapBounds" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Top" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(25, -324)
+shape = SubResource("WorldBoundaryShape2D_hh8vk")
+
+[node name="Bottom" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(39, 327)
+shape = SubResource("WorldBoundaryShape2D_h6v8l")
+
+[node name="Left" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(-576, -5)
+shape = SubResource("WorldBoundaryShape2D_l8fb7")
+
+[node name="Right" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(576, 0)
+shape = SubResource("WorldBoundaryShape2D_wnq8r")
 
 [node name="NavigableArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -49,6 +82,9 @@ unique_name_in_owner = true
 
 [node name="BuildingContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="Ball" parent="." instance=ExtResource("9_rdu7f")]
+position = Vector2(237, 158)
 
 [node name="GameManager" type="Node" parent="."]
 

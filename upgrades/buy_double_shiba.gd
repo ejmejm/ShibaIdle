@@ -20,12 +20,13 @@ func _init():
 
 
 func _on_purchase_logic():
-	spawner.spawn_inu("double_shiba_inu")
 	var shiba_inus := _get_shiba_inus()
-	for i in 2:
-		inu_container.remove_child(shiba_inus[i])
-		shiba_inus[i].queue_free()
-	player_stats.n_current_inus -= 1
+	if len(shiba_inus) >= 2:
+		for i in 2:
+			inu_container.remove_child(shiba_inus[i]) 
+			shiba_inus[i].queue_free()
+		player_stats.n_current_inus -= 1
+		spawner.spawn_inu("double_shiba_inu")
 
 
 func _get_shiba_inus() -> Array[Node]:

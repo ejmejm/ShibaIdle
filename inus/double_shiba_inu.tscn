@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/inu_controller.gd" id="1_qwhun"]
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_tdc5n"]
 [ext_resource type="Texture2D" uid="uid://dyestbkxs8hw4" path="res://tmp_sprites/shiba_sprite.png" id="2_ocjti"]
-[ext_resource type="PackedScene" uid="uid://cctjmwbk7ocxo" path="res://scenes/inu_stats.tscn" id="4_3qs3m"]
+[ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="4_3qs3m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qljsk"]
 radius = 13.6007
@@ -12,6 +12,11 @@ height = 41.0353
 [node name="DoubleShibaInu" type="Node2D"]
 script = ExtResource("1_tdc5n")
 metadata/inu_type = "double_shiba_inu"
+
+[node name="InuStats" parent="." instance=ExtResource("4_3qs3m")]
+unique_name_in_owner = true
+power = 2.0
+treat_power = 2
 
 [node name="Controller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
@@ -32,8 +37,3 @@ texture = ExtResource("2_ocjti")
 position = Vector2(-3.55271e-15, 0)
 rotation = 2.39842
 shape = SubResource("CapsuleShape2D_qljsk")
-
-[node name="InuStats" parent="." instance=ExtResource("4_3qs3m")]
-unique_name_in_owner = true
-power = 2.0
-treat_power = 2

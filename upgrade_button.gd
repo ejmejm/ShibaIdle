@@ -3,6 +3,7 @@ extends Button
 
 
 var _upgrade: BaseUpgrade
+var lock := Mutex.new()
 
 
 func get_upgrade() -> BaseUpgrade:
@@ -17,5 +18,7 @@ func set_upgrade(upgrade: BaseUpgrade):
 
 
 func _on_pressed():
+	lock.lock()
 	if _upgrade.is_purchasable():
 		_upgrade.purchase()
+	lock.unlock()

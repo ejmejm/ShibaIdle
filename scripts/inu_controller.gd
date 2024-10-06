@@ -14,7 +14,7 @@ var target_position: Vector2
 var is_stopping: bool = false
 var bounding_box: Rect2
 var player_stats: PlayerStats
-var inu_stats: InuStats
+@onready var inu_stats: InuStats = %InuStats
 
 func _ready():
 	# Get player stats so that inu can increase score on collision

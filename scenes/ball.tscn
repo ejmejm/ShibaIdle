@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh8uegvyvlaad"]
+
+[ext_resource type="Script" path="res://scripts/ball_movement.gd" id="1_531nu"]
+[ext_resource type="Texture2D" uid="uid://bkatuxokw8u1j" path="res://sprites/red_ball_no_tint.png" id="1_s3vo5"]
+[ext_resource type="Texture2D" uid="uid://d0117u13op3vy" path="res://sprites/red_ball_tint_tint.png" id="2_t6d7x"]
+[ext_resource type="Script" path="res://scripts/tint_sprite.gd" id="3_jxa0h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t0onb"]
+radius = 16.0
+
+[node name="Ball" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 2
+input_pickable = true
+gravity_scale = 0.0
+script = ExtResource("1_531nu")
+
+[node name="BallSprite" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_s3vo5")
+
+[node name="TintSprite" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("2_t6d7x")
+script = ExtResource("3_jxa0h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_t0onb")
+
+[connection signal="input_event" from="RigidBody2D" to="RigidBody2D" method="_on_input_event"]
