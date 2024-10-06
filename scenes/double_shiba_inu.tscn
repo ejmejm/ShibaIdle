@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://n5gd6xej0wec"]
+
+[ext_resource type="Script" path="res://scripts/random_walk.gd" id="1_1n3rj"]
+[ext_resource type="Texture2D" uid="uid://dyestbkxs8hw4" path="res://tmp_sprites/shiba_sprite.png" id="2_mjpg1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qljsk"]
+radius = 13.6007
+height = 41.0353
+
+[node name="DoubleShibaInu" type="CharacterBody2D"]
+collision_layer = 2
+floor_max_angle = 0.0
+script = ExtResource("1_1n3rj")
+metadata/inu_type = "double_shiba_inu"
+
+[node name="ShibaSprite2" type="Sprite2D" parent="."]
+position = Vector2(-5, -5)
+texture = ExtResource("2_mjpg1")
+
+[node name="ShibaSprite" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("2_mjpg1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.55271e-15, 0)
+rotation = 2.39842
+shape = SubResource("CapsuleShape2D_qljsk")

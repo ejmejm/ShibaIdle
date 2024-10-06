@@ -1,13 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=13 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
 [ext_resource type="PackedScene" uid="uid://clgwpwrjnay6g" path="res://scenes/player_stats.tscn" id="2_f1wp3"]
 [ext_resource type="Script" path="res://scripts/spawner.gd" id="3_m3s0q"]
-[ext_resource type="PackedScene" uid="uid://0m5v214t2sqc" path="res://scenes/shiba_inu.tscn" id="3_qr0pw"]
 [ext_resource type="Script" path="res://scripts/upgrades_manager.gd" id="5_khuaw"]
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
-[ext_resource type="Script" path="res://scenes/update_creature_count.gd" id="6_xiik3"]
-[ext_resource type="Script" path="res://scenes/max_creature_count_update.gd" id="7_sectu"]
+[ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
+[ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05yih"]
 size = Vector2(1126, 621)
@@ -52,9 +51,6 @@ player_stats = NodePath("../GameManager/PlayerStats")
 
 [node name="InuContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
-
-[node name="CharacterBody2D" parent="InuContainer" instance=ExtResource("3_qr0pw")]
-position = Vector2(-294, -140)
 
 [node name="GameManager" type="Node" parent="."]
 

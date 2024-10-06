@@ -6,6 +6,7 @@ extends BaseUpgrade
 @export var collision_max: int = 1
 @export var texture : Texture
 
+
 func _on_ready():
 	sprite.texture = texture
 	max_purchases = 1

@@ -7,10 +7,11 @@
 radius = 12.0357
 height = 31.0368
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="ShibaInu" type="CharacterBody2D"]
 collision_layer = 2
 floor_max_angle = 0.0
 script = ExtResource("1_boois")
+metadata/inu_type = "base_shiba_inu"
 
 [node name="ShibaSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_648j0")

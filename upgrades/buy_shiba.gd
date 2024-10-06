@@ -18,7 +18,7 @@ func _init():
 
 
 func _on_purchase_logic():
-	spawner.spawn_inu("shiba_inu")
+	spawner.spawn_inu("base_shiba_inu")
 	player_stats.n_current_inus += 1
 
 
