@@ -1,8 +1,9 @@
+class_name SpawnManager
 extends Node
 
-@export_group("External Nodes")
-@export var spawn_container: Node
-@export var player_stats: PlayerStats
+
+@onready var spawn_container: Node = %InuContainer
+@onready var player_stats: PlayerStats = %PlayerStats
 
 
 static var INU_RESOURCES := {
