@@ -1,27 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://n5gd6xej0wec"]
+[gd_scene load_steps=6 format=3 uid="uid://n5gd6xej0wec"]
 
-[ext_resource type="Script" path="res://scripts/random_walk.gd" id="1_1n3rj"]
-[ext_resource type="Texture2D" uid="uid://dyestbkxs8hw4" path="res://tmp_sprites/shiba_sprite.png" id="2_mjpg1"]
+[ext_resource type="Script" path="res://scripts/inu_controller.gd" id="1_qwhun"]
+[ext_resource type="Script" path="res://scripts/inu.gd" id="1_tdc5n"]
+[ext_resource type="Texture2D" uid="uid://dyestbkxs8hw4" path="res://tmp_sprites/shiba_sprite.png" id="2_ocjti"]
+[ext_resource type="PackedScene" uid="uid://cctjmwbk7ocxo" path="res://scenes/inu_stats.tscn" id="4_3qs3m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qljsk"]
 radius = 13.6007
 height = 41.0353
 
-[node name="DoubleShibaInu" type="CharacterBody2D"]
-collision_layer = 2
-floor_max_angle = 0.0
-script = ExtResource("1_1n3rj")
+[node name="DoubleShibaInu" type="Node2D"]
+script = ExtResource("1_tdc5n")
 metadata/inu_type = "double_shiba_inu"
 
-[node name="ShibaSprite2" type="Sprite2D" parent="."]
+[node name="Controller" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+floor_max_angle = 0.0
+script = ExtResource("1_qwhun")
+metadata/inu_type = "double_shiba_inu"
+
+[node name="ShibaSprite2" type="Sprite2D" parent="Controller"]
 position = Vector2(-5, -5)
-texture = ExtResource("2_mjpg1")
+texture = ExtResource("2_ocjti")
 
-[node name="ShibaSprite" type="Sprite2D" parent="."]
+[node name="ShibaSprite" type="Sprite2D" parent="Controller"]
 position = Vector2(2, 3)
-texture = ExtResource("2_mjpg1")
+texture = ExtResource("2_ocjti")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Controller"]
 position = Vector2(-3.55271e-15, 0)
 rotation = 2.39842
 shape = SubResource("CapsuleShape2D_qljsk")
+
+[node name="InuStats" parent="." instance=ExtResource("4_3qs3m")]
+unique_name_in_owner = true
+power = 2.0
+treat_power = 2
