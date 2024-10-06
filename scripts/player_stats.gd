@@ -36,6 +36,8 @@ var n_treats: int = 0:
 		n_treats = val
 		treat_count_update.emit(n_treats)
 		update_treats_ui()
+		
+var upgrade_purchases: Dictionary = {}
 
 
 # TODO: make it so that this will compactly represent large numbers, i.e. 1200000 -> 1.2M

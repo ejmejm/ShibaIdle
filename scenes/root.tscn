@@ -58,6 +58,8 @@ position = Vector2(-294, -140)
 
 [node name="GameManager" type="Node" parent="."]
 
+[node name="Minigames" type="Node" parent="GameManager"]
+
 [node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("treats_score_label") instance=ExtResource("2_f1wp3")]
 unique_name_in_owner = true
 treats_score_label = NodePath("../../UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/TreatsCountLabel")

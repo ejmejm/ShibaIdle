@@ -2,7 +2,7 @@ class_name BaseUpgrade
 extends Node
 
 
-
+@export var id: String
 @export var label: String
 @export var description: String
 @export var cost: int
@@ -34,6 +34,7 @@ func _should_display_logic() -> bool:
 
 func purchase():
 	n_purchases += 1
+	player_stats.upgrade_purchases[id] = n_purchases
 	player_stats.n_treats -= cost
 	_on_purchase_logic()
 

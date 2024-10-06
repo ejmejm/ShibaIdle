@@ -10,6 +10,7 @@ func link_dependencies(tree: SceneTree):
 
 
 func _init():
+	id = "buy_shiba_inu"
 	label = "Attract Shiba Inu"
 	description = "Buy one shiba inu companion to roam around your screen"
 	cost = 10
