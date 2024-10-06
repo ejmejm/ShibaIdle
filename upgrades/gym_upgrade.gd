@@ -12,7 +12,7 @@ func _init():
 	id = "buy_gym"
 	label = "Buy Shiba Inu Gymnasium"
 	description = "Buy a gym to help your Inu's with their gainz"
-	cost = 50
+	cost = 1 #1 for testing
 	max_purchases = 1
 
 func _on_ready():
@@ -21,14 +21,6 @@ func _on_ready():
 func _on_purchase_logic():
 	spawner.spawn_building("gym")	
 	#player_stats.n_current_buildings += 1 currently does nothing until player stats updated
-
-	
-func choose_open_spot() -> Vector2:
-	#pick an unclaimed building spot
-	#currently placeheld for testing
-	var placeholder = Vector2(250,375)
-	return placeholder
-
 
 	
 func _should_display_logic() -> bool:

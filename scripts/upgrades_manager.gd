@@ -9,7 +9,8 @@ var UPGRADE_REGISTRAR := {}
 func _ready():
 	UPGRADE_REGISTRAR = {
 		"buy_shiba_inu": preload("res://upgrades/buy_shiba.gd").new(),
-		"buy_double_shiba_inu": preload("res://upgrades/buy_double_shiba.gd").new()
+		"buy_double_shiba_inu": preload("res://upgrades/buy_double_shiba.gd").new(),
+		"gym_upgrade": preload("res://upgrades/gym_upgrade.gd").new()
 	}
 
 	for upgrade: BaseUpgrade in UPGRADE_REGISTRAR.values():

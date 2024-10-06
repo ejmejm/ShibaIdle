@@ -21,6 +21,13 @@ func _on_rigid_body_2d_body_entered(body):
 		#add logic to boost all Inu speed by 10% for 1 min
 		collisions = 0
 
+func choose_open_spot() -> Vector2:
+	#pick an unclaimed building spot
+	#currently placeheld for testing
+	var placeholder = Vector2(-300,0)
+	return placeholder
+	
+
 func _physics_process(delta):
 	#needs physics to fix this in place and have it bounce stuff off. This should be a static body but oops
 	pass

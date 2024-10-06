@@ -53,7 +53,7 @@ func _physics_process(delta):
 
 func choose_random_spot() -> Vector2:
 	# Pick a random point within the bounding box
-	return bounding_box.position + Vector2(
+	return Vector2(
 		randi() % int(bounding_box.size.x),
 		randi() % int(bounding_box.size.y)
 	)
