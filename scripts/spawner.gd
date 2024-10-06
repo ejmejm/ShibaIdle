@@ -21,10 +21,10 @@ func spawn_inu(inu_type: String):
 		push_error(
 			"Inu type '%s' cannot be spawned because that inu type does not exist" % inu_type)
 
-	var inu: Inu = INU_RESOURCES[inu_type].instantiate()
+	var inu: CharacterBody2D = INU_RESOURCES[inu_type].instantiate()
 	inu.visible = false
 	spawn_container.add_child(inu)
-	inu.position = inu.controller.choose_random_spot()
+	inu.position = inu.choose_random_spot()
 	inu.visible = true
 	
 	player_stats.creature_score += 1

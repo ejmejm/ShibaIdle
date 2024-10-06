@@ -12,7 +12,7 @@ func _init():
 	id = "buy_gym"
 	label = "Buy Shiba Inu Gymnasium"
 	description = "Buy a gym to help your Inu's with their gainz"
-	cost = 1 #1 for testing
+	cost = 50 
 	max_purchases = 1
 
 func _on_ready():
@@ -24,8 +24,8 @@ func _on_purchase_logic():
 
 	
 func _should_display_logic() -> bool:
-	return true #TODO set as true for testing add logic later
+	return player_stats.n_treats >= cost and player_stats.n_current_inus >= 3 #change to highest treats after Edan commit add
 
 
 func _is_purchasable_logic() -> bool:
-	return true #TODO set as true for testing, add logic later
+	return player_stats.n_treats >= cost and player_stats.max_inu_capacity >= 20

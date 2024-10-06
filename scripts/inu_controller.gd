@@ -14,7 +14,7 @@ var target_position: Vector2
 var is_stopping: bool = false
 var bounding_box: Rect2
 var player_stats: PlayerStats
-
+var inu_stats: InuStats
 
 func _ready():
 	# Get player stats so that inu can increase score on collision
@@ -71,7 +71,7 @@ func give_collision_treats(collision: KinematicCollision2D):
 func move_towards_target():
 	# Move towards the target position with constant speed
 	var direction = (target_position - global_position).normalized()
-	velocity = direction * 100  # Adjust speed as needed
+	velocity = direction * 100 * inu_stats.speed # Adjust speed as needed
 	move_and_slide()
 	
 	if get_slide_collision_count() > 0:

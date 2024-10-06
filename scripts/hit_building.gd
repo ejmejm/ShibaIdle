@@ -7,6 +7,7 @@ const PLAYER_STATS_PATH: String = "/root/Root/GameManager/PlayerStats"
 var collisions : int =  0
 var collision_max: int = 10
 var player_stats: PlayerStats
+var inu_stats: InuStats
 
 
 func _ready():
@@ -17,9 +18,13 @@ func _ready():
 func _on_rigid_body_2d_body_entered(body):
 	collisions += 1
 	if collisions >= 10:
-		print("yay you go the gainz")
-		#add logic to boost all Inu speed by 10% for 1 min
 		collisions = 0
+		inu_stats.speed *= 1.1
+		await get_tree().create_timer(60).timeout
+		inu_stats.speed = 1.0
+		print("the speed boost is working")
+		#add logic to boost all Inu speed by 10% for 1 min
+		
 
 func choose_open_spot() -> Vector2:
 	#pick an unclaimed building spot
