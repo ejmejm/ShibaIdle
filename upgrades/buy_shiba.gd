@@ -18,3 +18,12 @@ func _init():
 
 func _on_purchase_logic():
 	spawner.spawn_inu("shiba_inu")
+	player_stats.n_current_inus += 1
+
+
+func _should_display_logic() -> bool:
+	return player_stats.n_current_inus < player_stats.max_inu_capacity
+
+
+func _is_purchasable_logic() -> bool:
+	return player_stats.n_current_inus < player_stats.max_inu_capacity

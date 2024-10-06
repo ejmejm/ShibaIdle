@@ -18,11 +18,13 @@ extends Node
 	get:
 		return n_treats
 
-@export var max_inu_count: int = 5
+@export var max_inu_capacity: int = 5
 
 @export_category("UI Components")
 @export var treats_score_label: Label
 #@export var treats_label: Label
+
+var n_current_inus: int = 0
 
 
 # TODO: make it so that this will compactly represent large numbers, i.e. 1200000 -> 1.2M
