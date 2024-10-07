@@ -1,12 +1,11 @@
 class_name UpgradeButton
 extends Button
 
-@onready var description_panel: PanelContainer = $UICanvas/Desc_panel
+@onready var description_panel: PanelContainer = $/root/Root/UICanvas/DescriptionPanel
 
 var _upgrade: BaseUpgrade
 var lock := Mutex.new()
 var base_text: String
-
 
 
 func get_upgrade() -> BaseUpgrade:

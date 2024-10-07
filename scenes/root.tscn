@@ -123,19 +123,19 @@ script = ExtResource("7_ndddy")
 [node name="UICanvas" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="Desc_panel" type="PanelContainer" parent="UICanvas"]
+[node name="DescriptionPanel" type="PanelContainer" parent="UICanvas"]
 visible = false
 offset_top = 606.0
 offset_right = 1152.0
 offset_bottom = 649.0
 
-[node name="MarginContainer" type="MarginContainer" parent="UICanvas/Desc_panel"]
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/DescriptionPanel"]
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="UICanvas/Desc_panel/MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="UICanvas/DescriptionPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UICanvas/Desc_panel/MarginContainer/CenterContainer"]
+[node name="Label" type="Label" parent="UICanvas/DescriptionPanel/MarginContainer/CenterContainer"]
 layout_mode = 2
 text = "Lorum ipsum motha fucka"
 
