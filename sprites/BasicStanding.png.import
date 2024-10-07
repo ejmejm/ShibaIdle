@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp6o4nsf73l88"
-path="res://.godot/imported/TestBasicWalk.png-407d83e672d5e57130a1e7fa02df8480.ctex"
+uid="uid://degbw0qdhqwo4"
+path="res://.godot/imported/BasicStanding.png-2005edebf995cf5f2fa1aa99f29523d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/TestBasicWalk.png"
-dest_files=["res://.godot/imported/TestBasicWalk.png-407d83e672d5e57130a1e7fa02df8480.ctex"]
+source_file="res://sprites/BasicStanding.png"
+dest_files=["res://.godot/imported/BasicStanding.png-2005edebf995cf5f2fa1aa99f29523d6.ctex"]
 
 [params]
 

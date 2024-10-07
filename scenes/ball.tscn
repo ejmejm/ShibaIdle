@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bkatuxokw8u1j" path="res://sprites/red_ball_no_tint.png" id="1_s3vo5"]
 [ext_resource type="Texture2D" uid="uid://d0117u13op3vy" path="res://sprites/red_ball_tint_tint.png" id="2_t6d7x"]
 [ext_resource type="Script" path="res://scripts/tint_sprite.gd" id="3_jxa0h"]
-[ext_resource type="AudioStream" uid="uid://betxkpy8w8m4t" path="res://audio/ThrowBallSound.wav" id="5_xnwsm"]
+[ext_resource type="AudioStream" uid="uid://betxkpy8w8m4t" path="res://Audio/ThrowBallSound.wav" id="5_xnwsm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t0onb"]
 radius = 16.0

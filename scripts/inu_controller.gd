@@ -16,6 +16,8 @@ var is_stopping: bool = false
 var bounding_box: Rect2
 var ball: BallController
 var player_stats: PlayerStats
+@onready var animated_sprite: AnimatedSprite2D = $ShibaSprite
+@onready var sprite: Sprite2D = $ShibaSpriteStationary
 @onready var inu_stats: InuStats = %InuStats
 
 
@@ -44,6 +46,7 @@ func _ready():
 		push_error("Bounding box shape must be a RectangleShape2D!")
 
 	set_physics_process(should_walk)
+	animated_sprite.play()
 
 
 func _on_ball_rolled(location: Vector2, radius: float):
@@ -67,6 +70,13 @@ func _physics_process(delta):
 		# Check if reached target or collided
 		if global_position.distance_to(target_position) <= TARGET_EQ_THRESHOLD:
 			stop_movement()
+			
+	if velocity.y == 0 and velocity.x == 0:
+		animated_sprite.visible = false
+		sprite.visible = true
+	else:
+		animated_sprite.visible = true
+		sprite.visible = false
 
 
 func choose_random_spot() -> Vector2:
@@ -90,6 +100,14 @@ func move_towards_target():
 	var direction = (target_position - global_position).normalized()
 	velocity = direction * 100 * inu_stats.speed # Adjust speed as needed
 	move_and_slide()
+	
+	#determine direction inu should face
+	if velocity.x > 0:
+		animated_sprite.flip_v = 0
+		animated_sprite.rotation = velocity.angle()
+	else:
+		animated_sprite.flip_v = 1
+		animated_sprite.rotation = velocity.angle()
 	
 	if get_slide_collision_count() > 0:
 		stop_movement()
