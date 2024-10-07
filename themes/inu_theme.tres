@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://kpuvauydmypn"]
+
+[ext_resource type="FontFile" uid="uid://c4fel6edk5vlw" path="res://themes/JacquardaBastarda9-Regular.ttf" id="1_77nor"]
+[ext_resource type="Texture2D" uid="uid://d2v56aulvkmpb" path="res://sprites/Border.png" id="2_tni7g"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gbemd"]
+texture = ExtResource("2_tni7g")
+texture_margin_left = 54.0
+texture_margin_top = 12.0
+texture_margin_right = 54.0
+texture_margin_bottom = 20.0
+
+[resource]
+Label/fonts/font = ExtResource("1_77nor")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_gbemd")
