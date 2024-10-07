@@ -51,4 +51,4 @@ func _physics_process(delta: float) -> void:
 			time_since_release -= 0.1
 	
 	# Apply angular velocity based on linear velocity
-	angular_velocity = linear_velocity.length() * sign(linear_velocity.x) * 0.1
+	angular_velocity = linear_velocity.length() * sign(linear_velocity.x) * 0.02

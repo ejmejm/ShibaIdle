@@ -17,6 +17,7 @@ func _ready():
 		
 		# Items
 		"buy_ball": preload("res://upgrades/buy_ball.gd").new(),
+		"buy_big_ball": preload("res://upgrades/buy_big_ball.gd").new(),
 		
 		# Passives
 		"inu_capacity_1": preload("res://upgrades/inu_capacity_1.gd").new(),
