@@ -1,0 +1,346 @@
+[gd_scene load_steps=26 format=3 uid="uid://bfa5k0eld51ts"]
+
+[ext_resource type="Texture2D" uid="uid://cm0m00dsfw6xv" path="res://tilebg/LDMG.png" id="1_alsf6"]
+[ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
+[ext_resource type="PackedScene" uid="uid://clgwpwrjnay6g" path="res://scenes/player_stats.tscn" id="2_f1wp3"]
+[ext_resource type="Script" path="res://scripts/spawner.gd" id="3_m3s0q"]
+[ext_resource type="Script" path="res://scripts/upgrades_manager.gd" id="5_khuaw"]
+[ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
+[ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
+[ext_resource type="Script" path="res://scenes/buff_decay.gd" id="7_ndddy"]
+[ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
+[ext_resource type="Theme" uid="uid://kpuvauydmypn" path="res://themes/inu_theme.tres" id="8_1tbu2"]
+[ext_resource type="Theme" uid="uid://bldcxper7r8tf" path="res://themes/inu_simple_theme.tres" id="8_x3hy1"]
+[ext_resource type="PackedScene" uid="uid://bh8uegvyvlaad" path="res://scenes/ball.tscn" id="9_rdu7f"]
+[ext_resource type="Script" path="res://scripts/progress_bar.gd" id="10_0ld48"]
+[ext_resource type="AudioStream" uid="uid://cpu10ugppkfrf" path="res://audio/BACKGROUND.mp3" id="11_m2gjb"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hh8vk"]
+normal = Vector2(0, 1)
+distance = -126.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h6v8l"]
+distance = -249.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l8fb7"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wnq8r"]
+normal = Vector2(-1, 0)
+distance = -448.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05yih"]
+size = Vector2(1600, 900)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqgcw"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_iuwn5"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8j6x"]
+font_size = 78
+
+[sub_resource type="LabelSettings" id="LabelSettings_sns6y"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_x2tt7"]
+font_size = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tebg3"]
+bg_color = Color(1, 0.150139, 0.368862, 1)
+
+[node name="Root" type="Node2D"]
+position = Vector2(576, 324)
+
+[node name="MapBounds" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Top" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(25, -198)
+shape = SubResource("WorldBoundaryShape2D_hh8vk")
+
+[node name="Bottom" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(39, 327)
+shape = SubResource("WorldBoundaryShape2D_h6v8l")
+
+[node name="Left" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(-576, -5)
+shape = SubResource("WorldBoundaryShape2D_l8fb7")
+
+[node name="Right" type="CollisionShape2D" parent="MapBounds"]
+position = Vector2(576, 0)
+shape = SubResource("WorldBoundaryShape2D_wnq8r")
+
+[node name="NavigableArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigableArea"]
+position = Vector2(224, 126)
+shape = SubResource("RectangleShape2D_05yih")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(224, 126)
+scale = Vector2(1.38889, 1.38889)
+texture = ExtResource("1_alsf6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Viewport" type="Camera2D" parent="."]
+position = Vector2(224, 126)
+
+[node name="ClickableTreat" parent="." node_paths=PackedStringArray("player_stats") instance=ExtResource("1_osj1l")]
+position = Vector2(224, 126)
+player_stats = NodePath("../GameManager/PlayerStats")
+
+[node name="ItemContainer" type="Node2D" parent="."]
+position = Vector2(224, 126)
+
+[node name="Ball" parent="ItemContainer" instance=ExtResource("9_rdu7f")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(237, 158)
+scale = Vector2(1.5, 1.5)
+
+[node name="InuContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(224, 126)
+
+[node name="BuildingContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(224, 126)
+
+[node name="GameManager" type="Node" parent="."]
+
+[node name="Minigames" type="Node" parent="GameManager"]
+
+[node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("treats_score_label") instance=ExtResource("2_f1wp3")]
+unique_name_in_owner = true
+treats_score_label = NodePath("../../UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer/TreatsCountLabel")
+max_inu_capacity = 10
+
+[node name="Spawner" type="Node" parent="GameManager"]
+unique_name_in_owner = true
+script = ExtResource("3_m3s0q")
+
+[node name="UpgradesManager" type="Node" parent="GameManager"]
+unique_name_in_owner = true
+script = ExtResource("5_khuaw")
+
+[node name="BuffDecay" type="Timer" parent="GameManager"]
+wait_time = 4.0
+autostart = true
+script = ExtResource("7_ndddy")
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="DescriptionPanel" type="PanelContainer" parent="UICanvas"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -60.0
+offset_right = 800.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme = ExtResource("8_x3hy1")
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/DescriptionPanel"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvas/DescriptionPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UICanvas/DescriptionPanel/MarginContainer/CenterContainer"]
+layout_mode = 2
+text = "Lorum ipsum"
+label_settings = SubResource("LabelSettings_nqgcw")
+
+[node name="TreatsPanel" type="PanelContainer" parent="UICanvas"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.5
+offset_right = 77.5
+offset_bottom = 107.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 1
+theme = ExtResource("8_1tbu2")
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/TreatsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="TreatsHeading" type="GridContainer" parent="UICanvas/TreatsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TreatsLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Treats:"
+label_settings = SubResource("LabelSettings_iuwn5")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TreatsCountLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_l8j6x")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -129.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme = ExtResource("8_1tbu2")
+
+[node name="StatsPanel" type="PanelContainer" parent="UICanvas/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/VBoxContainer/StatsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="StatsHeader" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_sns6y")
+horizontal_alignment = 1
+
+[node name="CreatureCountRow" type="HBoxContainer" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CreatureCountLabel" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "Inus: "
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+
+[node name="CreatureCount" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+script = ExtResource("6_xiik3")
+
+[node name="Divider" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+
+[node name="MaxCreatureCount" type="Label" parent="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_x2tt7")
+vertical_alignment = 1
+script = ExtResource("7_sectu")
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 15
+
+[node name="UpgradesPanel" type="PanelContainer" parent="UICanvas/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("6_pydca")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/VBoxContainer/UpgradesPanel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/VBoxContainer/UpgradesPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="UpgradesHeaderLabel" type="Label" parent="UICanvas/VBoxContainer/UpgradesPanel/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Upgrades"
+label_settings = SubResource("LabelSettings_sns6y")
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="UICanvas/VBoxContainer/UpgradesPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradesUpdateTimer" type="Timer" parent="UICanvas/VBoxContainer/UpgradesPanel"]
+wait_time = 0.1
+autostart = true
+
+[node name="ProgressbarContainer" type="PanelContainer" parent="UICanvas"]
+offset_right = 288.0
+offset_bottom = 64.0
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/ProgressbarContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/ProgressbarContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 2
+mouse_filter = 1
+shortcut_context = NodePath("../../../../TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer/TreatsCountLabel")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tebg3")
+max_value = 1e+06
+script = ExtResource("10_0ld48")
+
+[node name="Label" type="Label" parent="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Road to 100K treats!"
+horizontal_alignment = 1
+
+[node name="BGmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_m2gjb")
+volume_db = -16.159
+autoplay = true
+parameters/looping = true
+
+[node name="SoundFX" type="AudioStreamPlayer" parent="."]
+
+[connection signal="current_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/CreatureCount" method="_on_player_stats_current_inu_count_update"]
+[connection signal="max_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_player_stats_max_inu_count_update"]
+[connection signal="treat_count_update" from="GameManager/PlayerStats" to="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer/ProgressBar" method="_on_player_stats_treat_count_update"]
+[connection signal="timeout" from="GameManager/BuffDecay" to="GameManager/BuffDecay" method="_on_timeout"]
+[connection signal="ready" from="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_ready"]
+[connection signal="ready" from="UICanvas/VBoxContainer/UpgradesPanel" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_ready"]
+[connection signal="timeout" from="UICanvas/VBoxContainer/UpgradesPanel/UpgradesUpdateTimer" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_update_timer"]

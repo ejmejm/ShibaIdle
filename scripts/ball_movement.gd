@@ -5,10 +5,40 @@ extends RigidBody2D
 signal rolled
 
 
+var ball_resource := preload("res://scenes/ball.tscn")
+
+var initial_position: Vector2
 var follow_cursor := false
 var last_mouse_position := Vector2.ZERO
 var time_since_release := 0.0
 var attraction_radius := 150.0
+
+
+func _ready() -> void:
+	initial_position = get_parent().position
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ResetKey") and get_parent().visible:
+		replace_with_copy()
+
+
+func replace_with_copy() -> void:
+	var new_ball = ball_resource.instantiate()
+	new_ball.position = initial_position
+	
+	var old_ball = get_parent()
+	
+	var controller: BallController = new_ball.get_child(0)
+	controller.attraction_radius = attraction_radius
+	
+	for i in range(len(controller.get_children())):
+		controller.get_child(i).scale = get_child(i).scale
+	
+	var container: Node = old_ball.get_parent()
+	container.remove_child(old_ball)
+	container.add_child(new_ball)
+	old_ball.queue_free()
 
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

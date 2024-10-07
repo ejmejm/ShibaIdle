@@ -2,11 +2,11 @@ class_name BuyBigBallUpgrade
 extends BaseUpgrade
 
 
-var ball: Node2D
+var container: Node2D
 
 
 func link_dependencies(tree: SceneTree):
-	ball = tree.root.get_node("/root/Root/ItemContainer/%Ball")
+	container = tree.root.get_node("/root/Root/ItemContainer/")
 
 
 func _init():
@@ -20,6 +20,7 @@ func _init():
 
 func _on_purchase_logic():
 	#ball.visible = true
+	var ball: Node2D = container.get_node("Ball")
 	var ball_controller: BallController = ball.get_child(0)
 	ball_controller.attraction_radius *= 2
 	
