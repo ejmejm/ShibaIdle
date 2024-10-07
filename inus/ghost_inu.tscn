@@ -58,7 +58,7 @@ metadata/inu_type = "base_shiba_inu"
 [node name="ShibaSprite" type="AnimatedSprite2D" parent="Controller"]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_jcydp")
-frame_progress = 0.954383
+frame_progress = 0.0123119
 
 [node name="ShibaSpriteStationary" type="Sprite2D" parent="Controller"]
 visible = false

@@ -14,6 +14,7 @@ func _ready():
 		
 		# Buildings
 		"gym_upgrade": preload("res://upgrades/gym_upgrade.gd").new(),
+		"factory_upgrade": preload("res://upgrades/factory_upgrade.gd").new(),
 		
 		# Items
 		"buy_ball": preload("res://upgrades/buy_ball.gd").new(),

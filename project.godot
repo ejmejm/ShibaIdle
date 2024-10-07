@@ -24,6 +24,10 @@ window/size/always_on_top=true
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[gui]
+
+theme/custom="res://themes/inu_theme.tres"
+
 [input]
 
 PrimaryClick={
