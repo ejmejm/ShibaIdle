@@ -15,7 +15,8 @@ static var INU_RESOURCES := {
 }
 
 static var BUILDING_RESOURCES := {
-	"gym": preload("res://scenes/gym.tscn")
+	"gym": preload("res://scenes/gym.tscn"),
+	"factory": preload("res://scenes/treatfactory.tscn")
 }
 
 func spawn_inu(inu_type: String):
