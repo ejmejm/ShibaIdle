@@ -31,8 +31,8 @@ func spawn_inu(inu_type: String):
 		tempos = Vector2(randi() % 2303 - 1151, randi() % 1295 - 647)
 	inu.position = tempos
 	inu.visible = true
-	audiofx.stream = spawn_sound
-	audiofx.play()
+	#audiofx.stream = spawn_sound
+	#audiofx.play()
 	
 	player_stats.creature_score += 1
 	

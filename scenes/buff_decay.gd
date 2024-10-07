@@ -10,5 +10,4 @@ func _on_timeout():
 			continue
 		
 		var inu: Inu = node
-		print(inu.stats.speed)
 		inu.stats.speed_bonus -= 1
