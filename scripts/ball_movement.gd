@@ -6,6 +6,7 @@ signal rolled
 
 
 var ball_resource := preload("res://scenes/ball.tscn")
+#var roll_sound: AudioStreamPlayer2D = 
 
 var initial_position: Vector2
 var follow_cursor := false
@@ -46,7 +47,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		follow_cursor = true
 		last_mouse_position = get_global_mouse_position()
 		time_since_release = 0.1
-		$"../AudioStreamPlayer2D".play()
+		$"../SelectSound".play()
 
 
 func check_let_go():
@@ -80,6 +81,8 @@ func _physics_process(delta: float) -> void:
 		if time_since_release >= 0.1 and linear_velocity.length() >= 20:
 			emit_signal("rolled", global_position, attraction_radius)
 			time_since_release -= 0.1
+
 	
+
 	# Apply angular velocity based on linear velocity
 	angular_velocity = linear_velocity.length() * sign(linear_velocity.x) * 0.02

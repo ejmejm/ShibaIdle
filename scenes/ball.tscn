@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh8uegvyvlaad"]
+[gd_scene load_steps=8 format=3 uid="uid://bh8uegvyvlaad"]
 
 [ext_resource type="Script" path="res://scripts/ball_movement.gd" id="1_531nu"]
 [ext_resource type="Texture2D" uid="uid://bkatuxokw8u1j" path="res://sprites/red_ball_no_tint.png" id="1_s3vo5"]
 [ext_resource type="Texture2D" uid="uid://d0117u13op3vy" path="res://sprites/red_ball_tint_tint.png" id="2_t6d7x"]
 [ext_resource type="Script" path="res://scripts/tint_sprite.gd" id="3_jxa0h"]
-[ext_resource type="AudioStream" uid="uid://betxkpy8w8m4t" path="res://audio/ThrowBallSound.wav" id="5_xnwsm"]
+[ext_resource type="AudioStream" uid="uid://clt0yqw4u2ut4" path="res://audio/ball_select.wav" id="5_6omyd"]
+[ext_resource type="AudioStream" uid="uid://dv3aaxca0dsii" path="res://audio/ball_roll.mp3" id="6_wdsmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t0onb"]
 radius = 16.0
@@ -27,7 +28,15 @@ script = ExtResource("3_jxa0h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_t0onb")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_xnwsm")
+[node name="SelectSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6omyd")
+volume_db = -9.385
+pitch_scale = 0.83
+
+[node name="RollSound" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = ExtResource("6_wdsmy")
+volume_db = -9.385
+pitch_scale = 0.83
 
 [connection signal="input_event" from="RigidBody2D" to="RigidBody2D" method="_on_input_event"]
