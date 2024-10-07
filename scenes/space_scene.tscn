@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://calws05t186qc"]
+
+[ext_resource type="Texture2D" uid="uid://sl20scn43aao" path="res://sprites/space_dull.png" id="1_edbxu"]
+[ext_resource type="Texture2D" uid="uid://pjc17cdj4w1n" path="res://sprites/space_bright.png" id="2_u2p3u"]
+[ext_resource type="Script" path="res://bright_sprite.gd" id="3_0svqt"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_edbxu")
+
+[node name="BrightSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_u2p3u")
+script = ExtResource("3_0svqt")

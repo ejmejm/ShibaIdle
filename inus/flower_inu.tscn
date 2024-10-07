@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_fuj04"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="2_2saps"]
-[ext_resource type="Script" path="res://inus/flower_controller.gd" id="3_5sb0j"]
+[ext_resource type="Script" path="res://scripts/flower_controller.gd" id="3_5sb0j"]
 [ext_resource type="Texture2D" uid="uid://vggg43xjfx6u" path="res://sprites/flowerwalk.png" id="4_l3w3o"]
 [ext_resource type="Texture2D" uid="uid://b1a07jwrryxqn" path="res://sprites/FlowerStanding.png" id="5_8gwvm"]
 

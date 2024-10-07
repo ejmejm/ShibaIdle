@@ -8,6 +8,7 @@ const BALL_PATH: String = "/root/Root/ItemContainer/%Ball"
 const TARGET_EQ_THRESHOLD: int = 5
 
 @export var should_walk: bool = true
+@export var floating: bool = false
 @export var stop_duration_range: Vector2 = Vector2(1, 3) # Range for random stop duration
 @export var bounding_box_shape: CollisionShape2D # CollisionShape2D used for bounding box
 
@@ -21,10 +22,19 @@ var player_stats: PlayerStats
 @onready var inu_stats: InuStats = %InuStats
 
 var is_mouse_entered: bool = false
+var floating_speed: float = 30.0  # Adjust this value to change the floating speed
+var floating_angle: float  # Store the random floating angle
+var floating_rotation: float  # Store the random floating angle
+
+var hit_player: AudioStreamPlayer
 
 
 func _ready():
 	input_pickable = true
+	
+	var audio_container = get_node("/root/Root/HitAudioContainer")
+	var n_children := len(audio_container.get_children())
+	hit_player = audio_container.get_child(randi() % n_children)
 	
 	# Get player stats so that inu can increase score on collision
 	player_stats = get_node(PLAYER_STATS_PATH) 
@@ -62,8 +72,42 @@ func _on_ball_rolled(location: Vector2, radius: float):
 	)
 
 
+func start_floating():
+	floating = true
+	should_walk = false
+	is_stopping = false
+	animated_sprite.visible = true
+	sprite.visible = false
+	
+	# Generate a random angle between -20 and 20 degrees
+	floating_angle = deg_to_rad(randf_range(-20, 20))
+	
+	# Set initial velocity with the random angle
+	velocity = Vector2(floating_speed, 0).rotated(floating_angle)
+	floating_rotation = randf_range(-0.2, 0.2)
+
+
 func _physics_process(delta):
-	if should_walk and not is_stopping:
+	if floating:
+		# Apply a slight perpendicular force to create a floating effect
+		#var perpendicular_velocity = velocity.rotated(PI/2).normalized() * sin(Time.get_ticks_msec() * 0.005) * 20
+		#velocity = velocity.normalized() * floating_speed + perpendicular_velocity
+		move_and_slide()
+		
+		# Ensure the Inu stays visible and rotates slightly
+		#animated_sprite.rotation = floating_rotation
+		rotate(delta * floating_rotation)
+		
+		# Wrap around the screen if the Inu goes off any edge
+		if global_position.x > bounding_box.end.x:
+			global_position.x = bounding_box.position.x
+		elif global_position.x < bounding_box.position.x:
+			global_position.x = bounding_box.end.x
+		if global_position.y > bounding_box.end.y:
+			global_position.y = bounding_box.position.y
+		elif global_position.y < bounding_box.position.y:
+			global_position.y = bounding_box.end.y
+	elif should_walk and not is_stopping:
 		# If no target, pick a random spot in the bounding box
 		if target_position == Vector2.ZERO:
 			target_position = choose_random_spot()
@@ -95,6 +139,7 @@ func choose_random_spot() -> Vector2:
 func give_collision_treats(collision: KinematicCollision2D):
 	var collider := collision.get_collider()
 	if collider is Node2D and (collider as Node2D).get_parent() is CollidableTreat:
+		hit_player.play()
 		var collidable_treat: CollidableTreat = (collider as Node2D).get_parent()
 		var treat_power := (get_parent() as Inu).stats.treat_power
 		player_stats.n_treats += treat_power * collidable_treat.treat_give_count

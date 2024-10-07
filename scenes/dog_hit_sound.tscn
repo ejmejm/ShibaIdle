@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://du0k1ywd6xef"]
+
+[ext_resource type="AudioStream" uid="uid://2qntwx5j7rp4" path="res://audio/ClickSound.mp3" id="1_ep1tn"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_ep1tn")
+volume_db = -15.957
+pitch_scale = 1.21
