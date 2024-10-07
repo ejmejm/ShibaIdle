@@ -5,6 +5,8 @@ extends Node
 @onready var spawn_container: Node = %InuContainer
 @onready var building_container: Node = %BuildingContainer
 @onready var player_stats: PlayerStats = %PlayerStats
+@onready var spawn_sound = preload("res://audio/ShibaSpawnSound.mp3")
+@onready var audiofx: AudioStreamPlayer = $"../../SoundFX"
 
 
 static var INU_RESOURCES := {
@@ -29,6 +31,8 @@ func spawn_inu(inu_type: String):
 		tempos = Vector2(randi() % 2303 - 1151, randi() % 1295 - 647)
 	inu.position = tempos
 	inu.visible = true
+	audiofx.stream = spawn_sound
+	audiofx.play()
 	
 	player_stats.creature_score += 1
 	
