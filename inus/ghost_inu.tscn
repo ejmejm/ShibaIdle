@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_kh8bx"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="2_mixyv"]
-[ext_resource type="Script" path="res://scripts/inu_controller.gd" id="3_mr7ny"]
+[ext_resource type="Script" path="res://inus/ghost_controller.gd" id="3_578bc"]
 [ext_resource type="Texture2D" uid="uid://c6rtle5400fl4" path="res://sprites/ghostriwalk.png" id="4_lqeyh"]
 [ext_resource type="Texture2D" uid="uid://c1p2ln6asss63" path="res://sprites/GhostInu.png" id="5_hrjjp"]
 
@@ -47,12 +47,14 @@ metadata/inu_type = "ghost_shiba_inu"
 
 [node name="InuStats" parent="." instance=ExtResource("2_mixyv")]
 unique_name_in_owner = true
+treat_power = 2
+speed = 0.4
 
 [node name="Controller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 2
 floor_max_angle = 0.0
-script = ExtResource("3_mr7ny")
+script = ExtResource("3_578bc")
 metadata/inu_type = "base_shiba_inu"
 
 [node name="ShibaSprite" type="AnimatedSprite2D" parent="Controller"]

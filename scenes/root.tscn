@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=25 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="Texture2D" uid="uid://cm0m00dsfw6xv" path="res://tilebg/LDMG.png" id="1_alsf6"]
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
@@ -16,18 +16,23 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hh8vk"]
 normal = Vector2(0, 1)
+distance = -126.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h6v8l"]
-distance = 3.06213
+distance = -249.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l8fb7"]
 normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wnq8r"]
 normal = Vector2(-1, 0)
+distance = -448.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05yih"]
-size = Vector2(1126, 621)
+size = Vector2(1600, 900)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqgcw"]
+font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_iuwn5"]
 font_size = 40
@@ -52,7 +57,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Top" type="CollisionShape2D" parent="MapBounds"]
-position = Vector2(25, -324)
+position = Vector2(25, -198)
 shape = SubResource("WorldBoundaryShape2D_hh8vk")
 
 [node name="Bottom" type="CollisionShape2D" parent="MapBounds"]
@@ -72,19 +77,24 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigableArea"]
-position = Vector2(0, 0.5)
+position = Vector2(224, 126)
 shape = SubResource("RectangleShape2D_05yih")
 
 [node name="Background" type="Sprite2D" parent="."]
+position = Vector2(224, 126)
+scale = Vector2(1.38889, 1.38889)
 texture = ExtResource("1_alsf6")
 metadata/_edit_use_anchors_ = true
 
 [node name="Viewport" type="Camera2D" parent="."]
+position = Vector2(224, 126)
 
 [node name="ClickableTreat" parent="." node_paths=PackedStringArray("player_stats") instance=ExtResource("1_osj1l")]
+position = Vector2(224, 126)
 player_stats = NodePath("../GameManager/PlayerStats")
 
 [node name="ItemContainer" type="Node2D" parent="."]
+position = Vector2(224, 126)
 
 [node name="Ball" parent="ItemContainer" instance=ExtResource("9_rdu7f")]
 unique_name_in_owner = true
@@ -94,9 +104,11 @@ scale = Vector2(1.5, 1.5)
 
 [node name="InuContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(224, 126)
 
 [node name="BuildingContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(224, 126)
 
 [node name="GameManager" type="Node" parent="."]
 
@@ -104,7 +116,7 @@ unique_name_in_owner = true
 
 [node name="PlayerStats" parent="GameManager" node_paths=PackedStringArray("treats_score_label") instance=ExtResource("2_f1wp3")]
 unique_name_in_owner = true
-treats_score_label = NodePath("../../UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/TreatsCountLabel")
+treats_score_label = NodePath("../../UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer/TreatsCountLabel")
 max_inu_capacity = 10
 
 [node name="Spawner" type="Node" parent="GameManager"]
@@ -125,10 +137,17 @@ layer = 5
 
 [node name="DescriptionPanel" type="PanelContainer" parent="UICanvas"]
 unique_name_in_owner = true
-visible = false
-offset_top = 606.0
-offset_right = 1152.0
-offset_bottom = 649.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -43.0
+offset_right = 800.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="UICanvas/DescriptionPanel"]
 layout_mode = 2
@@ -138,7 +157,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="UICanvas/DescriptionPanel/MarginContainer/CenterContainer"]
 layout_mode = 2
-text = "Lorum ipsum motha fucka"
+text = "Lorum ipsum"
+label_settings = SubResource("LabelSettings_nqgcw")
 
 [node name="TreatsPanel" type="PanelContainer" parent="UICanvas"]
 anchors_preset = 5
@@ -161,13 +181,16 @@ theme_override_constants/margin_right = 15
 [node name="TreatsHeading" type="GridContainer" parent="UICanvas/TreatsPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading"]
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer"]
 layout_mode = 2
 
-[node name="TreatsLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TreatsLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -177,7 +200,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="TreatsCountLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer"]
+[node name="TreatsCountLabel" type="Label" parent="UICanvas/TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_l8j6x")
@@ -292,14 +315,14 @@ layout_mode = 2
 [node name="ProgressBar" type="ProgressBar" parent="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 2
 mouse_filter = 1
-shortcut_context = NodePath("../../../../TreatsPanel/MarginContainer/TreatsHeading/HBoxContainer/TreatsCountLabel")
+shortcut_context = NodePath("../../../../TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer/TreatsCountLabel")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tebg3")
 max_value = 1e+06
 script = ExtResource("10_0ld48")
 
 [node name="Label" type="Label" parent="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Road to 1 MIL treats!"
+text = "Road to 100K treats!"
 horizontal_alignment = 1
 
 [node name="BGmusic" type="AudioStreamPlayer" parent="."]

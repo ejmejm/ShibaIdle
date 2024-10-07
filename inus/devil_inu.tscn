@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bd6b3dkvjnw1m" path="res://sprites/DevilStanding.png" id="5_2s5by"]
 [ext_resource type="Script" path="res://scripts/devil_overlap.gd" id="6_p2lcq"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynpdj"]
+size = Vector2(20.5148, 30.8432)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_cslqh"]
 atlas = ExtResource("4_yeaxq")
 region = Rect2(0, 0, 32, 32)
@@ -29,9 +32,6 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynpdj"]
-size = Vector2(20.5148, 30.8432)
-
 [node name="DevilInu" type="Node2D"]
 script = ExtResource("1_5lljb")
 metadata/inu_type = "devil_shiba_inu"
@@ -39,6 +39,16 @@ metadata/inu_type = "devil_shiba_inu"
 [node name="InuStats" parent="." instance=ExtResource("2_wb04f")]
 unique_name_in_owner = true
 treat_power = 20
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("6_p2lcq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+scale = Vector2(1.6, 1.3)
+shape = SubResource("RectangleShape2D_ynpdj")
 
 [node name="Controller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
@@ -58,16 +68,6 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_2s5by")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Controller"]
-rotation = 1.5708
-scale = Vector2(1.6, 1.3)
-shape = SubResource("RectangleShape2D_ynpdj")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("6_p2lcq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 rotation = 1.5708
 scale = Vector2(1.6, 1.3)
 shape = SubResource("RectangleShape2D_ynpdj")

@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://xfcue4vpf2u7"]
+[gd_scene load_steps=3 format=3 uid="uid://xfcue4vpf2u7"]
 
 [ext_resource type="Script" path="res://upgrade_button.gd" id="1_fhjaj"]
+[ext_resource type="AudioStream" uid="uid://tgyhkyh3d5fb" path="res://audio/SELECTION.mp3" id="2_23mgc"]
 
 [node name="UpgradeButton" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
 script = ExtResource("1_fhjaj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_23mgc")
+volume_db = -10.455
 
 [connection signal="mouse_entered" from="." to="." method="_on_button_hovered"]
 [connection signal="mouse_exited" from="." to="." method="_on_button_unhovered"]

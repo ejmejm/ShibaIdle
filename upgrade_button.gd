@@ -23,6 +23,7 @@ func set_upgrade(upgrade: BaseUpgrade):
 
 func _on_pressed():
 	lock.lock()
+	$AudioStreamPlayer.play()
 	if _upgrade.is_purchasable():
 		_upgrade.purchase()
 	lock.unlock()
