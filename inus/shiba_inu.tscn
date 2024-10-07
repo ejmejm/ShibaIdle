@@ -1,13 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://0m5v214t2sqc"]
+[gd_scene load_steps=10 format=3 uid="uid://0m5v214t2sqc"]
 
 [ext_resource type="Script" path="res://scripts/inu_controller.gd" id="1_06t7d"]
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_lv3w0"]
 [ext_resource type="Texture2D" uid="uid://dyestbkxs8hw4" path="res://tmp_sprites/shiba_sprite.png" id="2_63yp4"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="3_rf7co"]
+[ext_resource type="Texture2D" uid="uid://ca8emt14s0mhx" path="res://sprites/TestBasicWalk2.png" id="5_alian"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qljsk"]
 radius = 12.0357
 height = 31.0368
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18f1o"]
+atlas = ExtResource("5_alian")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdtnq"]
+atlas = ExtResource("5_alian")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jcydp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18f1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdtnq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="ShibaInu" type="Node2D"]
 script = ExtResource("1_lv3w0")
@@ -24,11 +47,16 @@ script = ExtResource("1_06t7d")
 metadata/inu_type = "base_shiba_inu"
 
 [node name="ShibaSprite" type="Sprite2D" parent="Controller"]
+visible = false
 texture = ExtResource("2_63yp4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Controller"]
 position = Vector2(0, 1)
 rotation = 1.28291
 shape = SubResource("CapsuleShape2D_qljsk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jcydp")
+frame_progress = 0.194893
 
 [connection signal="ready" from="." to="." method="_on_ready"]

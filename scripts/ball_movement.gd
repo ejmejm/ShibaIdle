@@ -16,6 +16,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		follow_cursor = true
 		last_mouse_position = get_global_mouse_position()
 		time_since_release = 0.1
+		$"../AudioStreamPlayer2D".play()
 
 
 func check_let_go():
