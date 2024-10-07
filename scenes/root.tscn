@@ -287,6 +287,8 @@ stream = ExtResource("11_m2gjb")
 autoplay = true
 parameters/looping = true
 
+[node name="SoundFX" type="AudioStreamPlayer" parent="."]
+
 [connection signal="current_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/CreatureCount" method="_on_player_stats_current_inu_count_update"]
 [connection signal="max_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_player_stats_max_inu_count_update"]
 [connection signal="treat_count_update" from="GameManager/PlayerStats" to="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer/ProgressBar" method="_on_player_stats_treat_count_update"]
