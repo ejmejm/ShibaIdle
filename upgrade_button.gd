@@ -2,6 +2,7 @@ class_name UpgradeButton
 extends Button
 
 @onready var description_panel: PanelContainer = $/root/Root/UICanvas/DescriptionPanel
+@onready var description_label: Label = $/root/Root/UICanvas/DescriptionPanel/MarginContainer/CenterContainer/Label
 
 var _upgrade: BaseUpgrade
 var lock := Mutex.new()
@@ -29,9 +30,10 @@ func _on_pressed():
 	
 
 func _on_button_hovered() -> void:
+	description_label.text = _upgrade.description
 	description_panel.visible = true
 
 
 
 func _on_button_unhovered() -> void:
-	pass # Replace with function body.
+	description_panel.visible = false
