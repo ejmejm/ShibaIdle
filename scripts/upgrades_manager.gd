@@ -11,6 +11,8 @@ func _ready():
 		# Inus
 		"buy_shiba_inu": preload("res://upgrades/buy_shiba.gd").new(),
 		"buy_double_shiba_inu": preload("res://upgrades/buy_double_shiba.gd").new(),
+		"buy_devil_shiba": preload("res://upgrades/buy_devil_shiba.gd").new(),
+		"buy_alien_shiba": preload("res://upgrades/buy_alien_shiba.gd").new(),
 		
 		# Buildings
 		"gym_upgrade": preload("res://upgrades/gym_upgrade.gd").new(),

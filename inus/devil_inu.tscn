@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://uscrfx11daoh"]
+[gd_scene load_steps=11 format=3 uid="uid://htug431y13l4"]
 
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_5lljb"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="2_wb04f"]
-[ext_resource type="Script" path="res://scripts/inu_controller.gd" id="3_omr7r"]
+[ext_resource type="Script" path="res://scripts/devil_inu_controller.gd" id="3_ccxni"]
 [ext_resource type="Texture2D" uid="uid://dtkwmkgsyi4v5" path="res://sprites/DevilShibaWalk.png" id="4_yeaxq"]
 [ext_resource type="Texture2D" uid="uid://bd6b3dkvjnw1m" path="res://sprites/DevilStanding.png" id="5_2s5by"]
+[ext_resource type="Script" path="res://scripts/devil_overlap.gd" id="6_p2lcq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cslqh"]
 atlas = ExtResource("4_yeaxq")
@@ -37,12 +38,13 @@ metadata/inu_type = "devil_shiba_inu"
 
 [node name="InuStats" parent="." instance=ExtResource("2_wb04f")]
 unique_name_in_owner = true
+treat_power = 20
 
 [node name="Controller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 2
 floor_max_angle = 0.0
-script = ExtResource("3_omr7r")
+script = ExtResource("3_ccxni")
 metadata/inu_type = "base_shiba_inu"
 
 [node name="ShibaSprite" type="AnimatedSprite2D" parent="Controller"]
@@ -60,4 +62,15 @@ rotation = 1.5708
 scale = Vector2(1.6, 1.3)
 shape = SubResource("RectangleShape2D_ynpdj")
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_p2lcq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+scale = Vector2(1.6, 1.3)
+shape = SubResource("RectangleShape2D_ynpdj")
+
 [connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

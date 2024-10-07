@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnl5cbsm4ocm4"]
+[gd_scene load_steps=10 format=3 uid="uid://bgijnau6552vi"]
 
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_ai38v"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="2_3fj36"]
@@ -37,6 +37,7 @@ metadata/inu_type = "alien_shiba_inu"
 
 [node name="InuStats" parent="." instance=ExtResource("2_3fj36")]
 unique_name_in_owner = true
+treat_power = 5
 
 [node name="Controller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true

@@ -6,9 +6,8 @@ func _init():
 	id = "inu_capacity_5"
 	label = "Upgrade Inu Capacity"
 	description = "Increases the maximum number of inus you can have by 200"
-	cost = 60000
+	cost = 20000
 	max_purchases = 1
-	treats_to_unlock = 20000
 
 
 func _on_purchase_logic():

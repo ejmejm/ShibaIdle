@@ -124,6 +124,7 @@ script = ExtResource("7_ndddy")
 layer = 5
 
 [node name="DescriptionPanel" type="PanelContainer" parent="UICanvas"]
+unique_name_in_owner = true
 visible = false
 offset_top = 606.0
 offset_right = 1152.0
@@ -303,6 +304,7 @@ horizontal_alignment = 1
 
 [node name="BGmusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_m2gjb")
+volume_db = -16.159
 autoplay = true
 parameters/looping = true
 
