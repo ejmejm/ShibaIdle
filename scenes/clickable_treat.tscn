@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://va8rw1sglveq"]
+[gd_scene load_steps=6 format=3 uid="uid://va8rw1sglveq"]
 
 [ext_resource type="Script" path="res://scripts/click_checker.gd" id="1_qe3ds"]
 [ext_resource type="Texture2D" uid="uid://d1mqdxdyeuevk" path="res://sprites/BoneSprite.png" id="2_aamy1"]
+[ext_resource type="Texture2D" uid="uid://cvwlv5khtboxl" path="res://sprites/dog_treat.png" id="2_p0vac"]
+[ext_resource type="AudioStream" uid="uid://2qntwx5j7rp4" path="res://audio/ClickSound.mp3" id="3_najci"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hihmn"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 144.35
+initial_velocity_max = 319.89
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 36.73
 
 [node name="ClickableTreat" type="Node2D"]
 script = ExtResource("1_qe3ds")
@@ -22,9 +34,25 @@ position = Vector2(0, 1.43051e-06)
 scale = Vector2(11.5, 11.5)
 polygon = PackedVector2Array(-12, -8, -12, -7, -13, -7, -13, -6, -14, -6, -14, -2, -13, -2, -13, -1, -11, -1, -11, 1, -13, 1, -13, 2, -14, 2, -14, 6, -13, 6, -13, 7, -12, 7, -12, 8, -9, 8, -9, 7, -8, 7, -8, 6, -7, 6, -7, 4, -6, 4, -6, 3, 6, 3, 6, 5, 7, 5, 7, 7, 8, 7, 8, 8, 11, 8, 11, 7, 12, 7, 12, 6, 13, 6, 13, 3, 12, 3, 12, 2, 11, 2, 11, 1, 10, 1, 10, -1, 11, -1, 11, -2, 12, -2, 12, -3, 13, -3, 13, -6, 12, -6, 12, -7, 11, -7, 11, -8, 8, -8, 8, -7, 7, -7, 7, -5, 6, -5, 6, -3, -6, -3, -6, -4, -7, -4, -7, -6, -8, -6, -8, -7, -9, -7, -9, -8)
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_hihmn")
+texture = ExtResource("2_p0vac")
+
+[node name="DogTreatShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.360784)
+position = Vector2(-5, 3)
+scale = Vector2(11.5, 11.5)
+texture = ExtResource("2_aamy1")
+
 [node name="DogTreatSprite" type="Sprite2D" parent="."]
 position = Vector2(0, 1.43051e-06)
 scale = Vector2(11.5, 11.5)
 texture = ExtResource("2_aamy1")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_najci")
+
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
