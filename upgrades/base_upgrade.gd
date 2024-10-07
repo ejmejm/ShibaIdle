@@ -34,10 +34,17 @@ func _should_display_logic() -> bool:
 
 
 func purchase():
-	n_purchases += 1
-	player_stats.upgrade_purchases[id] = n_purchases
-	player_stats.n_treats -= cost
-	_on_purchase_logic()
+	var n_times := 1
+	if Input.is_action_pressed("ModifierKey"):
+		n_times = 10 # Purchase 10 times when the modifier key is pressed
+		
+	for i in range(n_times):
+		if not is_purchasable() or not should_display():
+			break
+		n_purchases += 1
+		player_stats.upgrade_purchases[id] = n_purchases
+		player_stats.n_treats -= cost
+		_on_purchase_logic()
 
 
 func is_purchasable() -> bool:

@@ -4,6 +4,7 @@ extends Button
 
 var _upgrade: BaseUpgrade
 var lock := Mutex.new()
+var base_text: String
 
 
 func get_upgrade() -> BaseUpgrade:
@@ -12,7 +13,8 @@ func get_upgrade() -> BaseUpgrade:
 
 func set_upgrade(upgrade: BaseUpgrade):
 	_upgrade = upgrade
-	self.text = "%s (%d)" % [upgrade.label, upgrade.cost]
+	base_text = "%s [%d]" % [upgrade.label, upgrade.cost]
+	self.text = base_text
 	# TODO: Show descript text on hover for 2+ seconds
 	self.disabled = not _upgrade.is_purchasable()
 
