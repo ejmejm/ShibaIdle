@@ -14,8 +14,8 @@ func link_dependencies(tree: SceneTree):
 func _init():
 	id = "buy_factory"
 	label = "Buy Treat Factory"
-	description = "Temporarily increases the treat multiplier of shibas who enter (stackable)."
-	cost = 5000
+	description = "Walking through this gives exactly 20 treats for all shibas."
+	cost = 3000
 	max_purchases = 1
 
 
@@ -29,5 +29,5 @@ func _on_purchase_logic():
 
 
 func _should_display_logic() -> bool:
-	show = show or player_stats.n_current_inus >= 30
+	show = show or player_stats.n_current_inus >= 20
 	return show

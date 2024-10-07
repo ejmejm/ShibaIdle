@@ -33,7 +33,7 @@ func _ready():
 		"buy_space_ship": preload("res://upgrades/space_ship_upgrade.gd").new(),
 		
 		# Debugging (TODO: REMOVE FOR RELEASE!)
-		"debug_treats": preload("res://upgrades/debug_treats.gd").new(),
+		#"debug_treats": preload("res://upgrades/debug_treats.gd").new(),
 	}
 
 	for upgrade: BaseUpgrade in UPGRADE_REGISTRAR.values():

@@ -38,3 +38,7 @@ func _should_display_logic() -> bool:
 	var shiba_inus: Array[Node] = _get_shiba_inus()
 	show = show or shiba_inus.size() >= 4
 	return show
+
+
+func _is_purchasable_logic() -> bool:
+	return player_stats.n_current_inus < player_stats.max_inu_capacity
