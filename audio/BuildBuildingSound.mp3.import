@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cb5mpkym5y7ah"
-path="res://.godot/imported/BuildBuildingSound.mp3-c0de840e7b905637ad49dec2bb9277cc.mp3str"
+path="res://.godot/imported/BuildBuildingSound.mp3-32fbf1818714edc3e1a17326a009bf4d.mp3str"
 
 [deps]
 
-source_file="res://audio/BuildBuildingSound.mp3"
-dest_files=["res://.godot/imported/BuildBuildingSound.mp3-c0de840e7b905637ad49dec2bb9277cc.mp3str"]
+source_file="res://Audio/BuildBuildingSound.mp3"
+dest_files=["res://.godot/imported/BuildBuildingSound.mp3-32fbf1818714edc3e1a17326a009bf4d.mp3str"]
 
 [params]
 

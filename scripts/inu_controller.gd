@@ -74,6 +74,7 @@ func _physics_process(delta):
 	if velocity.y == 0 and velocity.x == 0:
 		animated_sprite.visible = false
 		sprite.visible = true
+
 	else:
 		animated_sprite.visible = true
 		sprite.visible = false

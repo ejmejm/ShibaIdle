@@ -1,13 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://n5gd6xej0wec"]
+[gd_scene load_steps=10 format=3 uid="uid://n5gd6xej0wec"]
 
-[ext_resource type="Script" path="res://scripts/inu_controller.gd" id="1_qwhun"]
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_tdc5n"]
-[ext_resource type="Texture2D" uid="uid://dyestbkxs8hw4" path="res://tmp_sprites/shiba_sprite.png" id="2_ocjti"]
+[ext_resource type="Script" path="res://scripts/double_inu_controller.gd" id="3_67xlx"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="4_3qs3m"]
+[ext_resource type="Texture2D" uid="uid://b4ftr87iai31r" path="res://sprites/BasicShibaSheet.png" id="4_lo2r7"]
+[ext_resource type="Texture2D" uid="uid://degbw0qdhqwo4" path="res://sprites/BasicStanding.png" id="5_55cx0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teeyc"]
+atlas = ExtResource("4_lo2r7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wyqf"]
+atlas = ExtResource("4_lo2r7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tooca"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teeyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wyqf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qljsk"]
-radius = 13.6007
-height = 41.0353
+radius = 14.9256
+height = 45.2145
 
 [node name="DoubleShibaInu" type="Node2D"]
 script = ExtResource("1_tdc5n")
@@ -22,18 +45,32 @@ treat_power = 2
 unique_name_in_owner = true
 collision_layer = 2
 floor_max_angle = 0.0
-script = ExtResource("1_qwhun")
+script = ExtResource("3_67xlx")
 metadata/inu_type = "double_shiba_inu"
 
-[node name="ShibaSprite2" type="Sprite2D" parent="Controller"]
-position = Vector2(-5, -5)
-texture = ExtResource("2_ocjti")
+[node name="ShibaSprite" type="AnimatedSprite2D" parent="Controller"]
+position = Vector2(-4, -7)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_tooca")
 
-[node name="ShibaSprite" type="Sprite2D" parent="Controller"]
-position = Vector2(2, 3)
-texture = ExtResource("2_ocjti")
+[node name="ShibaSpriteDouble" type="AnimatedSprite2D" parent="Controller"]
+position = Vector2(7, 4)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_tooca")
+
+[node name="ShibaSpriteStationaryDouble" type="Sprite2D" parent="Controller"]
+visible = false
+position = Vector2(5, 5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_55cx0")
+offset = Vector2(-10, -10)
+
+[node name="ShibaSpriteStationary" type="Sprite2D" parent="Controller"]
+visible = false
+position = Vector2(5, 5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_55cx0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Controller"]
-position = Vector2(-3.55271e-15, 0)
 rotation = 2.39842
 shape = SubResource("CapsuleShape2D_qljsk")
