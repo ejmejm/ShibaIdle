@@ -53,6 +53,7 @@ shape = SubResource("RectangleShape2D_ynpdj")
 [node name="Controller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 2
+input_pickable = true
 floor_max_angle = 0.0
 script = ExtResource("3_ccxni")
 metadata/inu_type = "base_shiba_inu"

@@ -20,8 +20,12 @@ var player_stats: PlayerStats
 @onready var sprite: Sprite2D = $ShibaSpriteStationary
 @onready var inu_stats: InuStats = %InuStats
 
+var is_mouse_entered: bool = false
+
 
 func _ready():
+	input_pickable = true
+	
 	# Get player stats so that inu can increase score on collision
 	player_stats = get_node(PLAYER_STATS_PATH) 
 	if player_stats == null:
@@ -124,3 +128,56 @@ func stop_movement():
 	stop_duration /= inu_stats.speed
 	await get_tree().create_timer(stop_duration).timeout
 	is_stopping = false
+
+
+### Handle Deletion ###
+
+
+func _mouse_enter() -> void:
+	is_mouse_entered = true
+	
+
+func _mouse_exit() -> void:
+	is_mouse_entered = false
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		_handle_hover(event)
+	elif event is InputEventMouseButton and event.is_action_pressed("PrimaryClick"):
+		_handle_click(event)
+
+
+func _turn_red():
+	modulate = Color.RED
+
+
+func _reverse_red():
+	modulate = Color.WHITE
+
+
+func _handle_hover(event: InputEventMouseMotion) -> void:
+	if Input.is_key_pressed(KEY_ALT):
+		var mouse_position = get_global_mouse_position()
+		if is_mouse_entered:
+			_turn_red()
+		else:
+			_reverse_red()
+	else:
+		_reverse_red()
+		#if get_node("CollisionShape2D").shape.collide_point(to_local(mouse_position)):
+			#outline.show()
+		#else:
+			#outline.hide()
+	#else:
+		#outline.hide()
+
+
+func _handle_click(event: InputEventMouseButton) -> void:
+	if Input.is_key_pressed(KEY_ALT):
+		if is_mouse_entered:
+			var inu: Inu = get_parent()
+			var container: Node = inu.get_parent()
+			container.remove_child(inu)
+			inu.queue_free()
+			player_stats.n_current_inus -= 1
