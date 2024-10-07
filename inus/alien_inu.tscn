@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnl5cbsm4ocm4"]
+
+[ext_resource type="Script" path="res://scripts/inu.gd" id="1_ai38v"]
+[ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="2_3fj36"]
+[ext_resource type="Script" path="res://scripts/inu_controller.gd" id="3_1rh0b"]
+[ext_resource type="Texture2D" uid="uid://b154g11jci7gu" path="res://sprites/alienwalksheet.png" id="4_3jt4r"]
+[ext_resource type="Texture2D" uid="uid://bg6885241wh3c" path="res://sprites/AlienStanding.png" id="5_7ivp4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b45ja"]
+atlas = ExtResource("4_3jt4r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x1iv"]
+atlas = ExtResource("4_3jt4r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jcydp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b45ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x1iv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynpdj"]
+size = Vector2(20.5148, 30.8432)
+
+[node name="AlienInu" type="Node2D"]
+script = ExtResource("1_ai38v")
+metadata/inu_type = "alien_shiba_inu"
+
+[node name="InuStats" parent="." instance=ExtResource("2_3fj36")]
+unique_name_in_owner = true
+
+[node name="Controller" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+floor_max_angle = 0.0
+script = ExtResource("3_1rh0b")
+metadata/inu_type = "base_shiba_inu"
+
+[node name="ShibaSprite" type="AnimatedSprite2D" parent="Controller"]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_jcydp")
+frame_progress = 0.896464
+
+[node name="ShibaSpriteStationary" type="Sprite2D" parent="Controller"]
+visible = false
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_7ivp4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Controller"]
+rotation = 1.5708
+scale = Vector2(1.6, 1.3)
+shape = SubResource("RectangleShape2D_ynpdj")
+
+[connection signal="ready" from="." to="." method="_on_ready"]
