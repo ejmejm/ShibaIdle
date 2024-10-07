@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bldcxper7r8tf"]
+
+[ext_resource type="FontFile" uid="uid://dmryibx0d1idd" path="res://themes/PixelifySans-VariableFont_wght.ttf" id="1_tqbbb"]
+[ext_resource type="Texture2D" uid="uid://d2v56aulvkmpb" path="res://sprites/Border.png" id="2_v37ar"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gbemd"]
+texture = ExtResource("2_v37ar")
+texture_margin_left = 17.0
+texture_margin_top = 12.0
+texture_margin_right = 17.0
+texture_margin_bottom = 20.0
+axis_stretch_vertical = 2
+region_rect = Rect2(39.9634, 0.028986, 360.155, 159.971)
+
+[resource]
+Label/fonts/font = ExtResource("1_tqbbb")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_gbemd")
