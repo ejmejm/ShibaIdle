@@ -9,6 +9,7 @@ size = Vector2(38.6667, 20)
 [node name="BonusTreat" type="Area2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_lqu83")
+value = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9.53674e-07, 0)

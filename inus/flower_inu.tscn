@@ -61,7 +61,7 @@ scale = Vector2(1.6, 1.3)
 shape = SubResource("RectangleShape2D_ynpdj")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 20.0
 autostart = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
