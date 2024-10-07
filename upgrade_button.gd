@@ -1,10 +1,12 @@
 class_name UpgradeButton
 extends Button
 
+@onready var description_panel: PanelContainer = $UICanvas/Desc_panel
 
 var _upgrade: BaseUpgrade
 var lock := Mutex.new()
 var base_text: String
+
 
 
 func get_upgrade() -> BaseUpgrade:
@@ -24,3 +26,13 @@ func _on_pressed():
 	if _upgrade.is_purchasable():
 		_upgrade.purchase()
 	lock.unlock()
+	
+	
+
+func _on_button_hovered() -> void:
+	description_panel.visible = true
+
+
+
+func _on_button_unhovered() -> void:
+	pass # Replace with function body.
