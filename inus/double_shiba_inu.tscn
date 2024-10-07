@@ -38,8 +38,7 @@ metadata/inu_type = "double_shiba_inu"
 
 [node name="InuStats" parent="." instance=ExtResource("4_3qs3m")]
 unique_name_in_owner = true
-power = 2.0
-treat_power = 2
+treat_power = 4
 
 [node name="Controller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true

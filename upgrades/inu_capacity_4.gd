@@ -5,7 +5,7 @@ extends BaseUpgrade
 func _init():
 	id = "inu_capacity_4"
 	label = "Upgrade Inu Capacity"
-	description = "Increases the maximum number of inus you can have by 100"
+	description = "Increases the maximum number of shibas you can have by 100."
 	cost = 10000
 	max_purchases = 1
 

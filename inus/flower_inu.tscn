@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://oxwb4854gqa3"]
+[gd_scene load_steps=10 format=3 uid="uid://b7swott3jsuvt"]
 
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_fuj04"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="2_2saps"]
-[ext_resource type="Script" path="res://scripts/inu_controller.gd" id="3_whwrd"]
+[ext_resource type="Script" path="res://inus/flower_controller.gd" id="3_5sb0j"]
 [ext_resource type="Texture2D" uid="uid://vggg43xjfx6u" path="res://sprites/flowerwalk.png" id="4_l3w3o"]
 [ext_resource type="Texture2D" uid="uid://b1a07jwrryxqn" path="res://sprites/FlowerStanding.png" id="5_8gwvm"]
 
@@ -42,7 +42,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 collision_layer = 2
 floor_max_angle = 0.0
-script = ExtResource("3_whwrd")
+script = ExtResource("3_5sb0j")
 metadata/inu_type = "base_shiba_inu"
 
 [node name="ShibaSprite" type="AnimatedSprite2D" parent="Controller"]
@@ -60,4 +60,9 @@ rotation = 1.5708
 scale = Vector2(1.6, 1.3)
 shape = SubResource("RectangleShape2D_ynpdj")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="timeout" from="Timer" to="Controller" method="_on_timer_timeout"]

@@ -4,6 +4,7 @@ extends BaseUpgrade
 
 var spawner: SpawnManager
 var inu_container: Node
+var show := false
 
 
 func link_dependencies(tree: SceneTree):
@@ -13,20 +14,15 @@ func link_dependencies(tree: SceneTree):
 
 func _init():
 	id = "buy_double_shiba_inu"
-	label = "Attract Double Shiba Inu"
-	description = "Buy a double shiba inu companion to roam around your screen. Requires 2 shiba inus."
-	cost = 30
+	label = "Attract Double Shiba"
+	description = "Buy a double shiba inu companion to roam around your screen. These give you 4x the treats per hit!"
+	cost = 20
 	max_purchases = -1
 
 
 func _on_purchase_logic():
-	var shiba_inus := _get_shiba_inus()
-	if len(shiba_inus) >= 2:
-		for i in 2:
-			inu_container.remove_child(shiba_inus[i]) 
-			shiba_inus[i].queue_free()
-		player_stats.n_current_inus -= 1
-		spawner.spawn_inu("double_shiba_inu")
+	player_stats.n_current_inus += 1
+	spawner.spawn_inu("double_shiba_inu")
 
 
 func _get_shiba_inus() -> Array[Node]:
@@ -40,4 +36,5 @@ func _get_shiba_inus() -> Array[Node]:
 
 func _should_display_logic() -> bool:
 	var shiba_inus: Array[Node] = _get_shiba_inus()
-	return shiba_inus.size() >= 2
+	show = show or shiba_inus.size() >= 4
+	return show

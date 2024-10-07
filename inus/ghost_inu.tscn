@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/inu.gd" id="1_kh8bx"]
 [ext_resource type="PackedScene" uid="uid://bmtny5iilm1dd" path="res://scenes/inu_stats.tscn" id="2_mixyv"]
-[ext_resource type="Script" path="res://inus/ghost_controller.gd" id="3_578bc"]
+[ext_resource type="Script" path="res://scripts/ghost_controller.gd" id="3_578bc"]
 [ext_resource type="Texture2D" uid="uid://c6rtle5400fl4" path="res://sprites/ghostriwalk.png" id="4_lqeyh"]
 [ext_resource type="Texture2D" uid="uid://c1p2ln6asss63" path="res://sprites/GhostInu.png" id="5_hrjjp"]
 

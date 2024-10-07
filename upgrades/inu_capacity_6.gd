@@ -5,10 +5,9 @@ extends BaseUpgrade
 func _init():
 	id = "inu_capacity_6"
 	label = "Upgrade Inu Capacity"
-	description = "Increases the maximum number of inus you can have by 200"
+	description = "Increases the maximum number of inus you can have by 200."
 	cost = 40000
 	max_purchases = 1
-	treats_to_unlock = 100000
 
 
 func _on_purchase_logic():

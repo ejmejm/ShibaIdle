@@ -12,7 +12,7 @@ func link_dependencies(tree: SceneTree):
 func _init():
 	id = "buy_devil_shiba"
 	label = "Attract Devil Shiba"
-	description = "Devil shibas give 20 treats per hit, but beware! They may turn other shibas into ghosts."
+	description = "Devil shibas give 20x treats per hit, but beware! They may turn other shibas into ghosts."
 	cost = 800
 	max_purchases = -1
 	treats_to_unlock = 250
@@ -21,10 +21,6 @@ func _init():
 func _on_purchase_logic():
 	spawner.spawn_inu("devil_shiba")
 	player_stats.n_current_inus += 1
-
-
-func _should_display_logic() -> bool:
-	return player_stats.n_current_inus < player_stats.max_inu_capacity
 
 
 func _is_purchasable_logic() -> bool:

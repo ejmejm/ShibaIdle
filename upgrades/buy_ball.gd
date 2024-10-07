@@ -12,7 +12,7 @@ func link_dependencies(tree: SceneTree):
 func _init():
 	id = "buy_ball"
 	label = "Buy Ball"
-	description = "This ball can be used to attract inus"
+	description = "This ball can be thrown to attract nearby inus."
 	cost = 100
 	max_purchases = 1
 	treats_to_unlock = 40

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=27 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="Texture2D" uid="uid://cm0m00dsfw6xv" path="res://tilebg/LDMG.png" id="1_alsf6"]
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
@@ -7,13 +7,14 @@
 [ext_resource type="Script" path="res://scripts/upgrades_manager.gd" id="5_khuaw"]
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
 [ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
-[ext_resource type="Script" path="res://scenes/buff_decay.gd" id="7_ndddy"]
+[ext_resource type="Script" path="res://scripts/buff_decay.gd" id="7_ndddy"]
 [ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
 [ext_resource type="Theme" uid="uid://kpuvauydmypn" path="res://themes/inu_theme.tres" id="8_1tbu2"]
 [ext_resource type="Theme" uid="uid://bldcxper7r8tf" path="res://themes/inu_simple_theme.tres" id="8_x3hy1"]
 [ext_resource type="PackedScene" uid="uid://bh8uegvyvlaad" path="res://scenes/ball.tscn" id="9_rdu7f"]
 [ext_resource type="Script" path="res://scripts/progress_bar.gd" id="10_0ld48"]
 [ext_resource type="AudioStream" uid="uid://cpu10ugppkfrf" path="res://audio/BACKGROUND.mp3" id="11_m2gjb"]
+[ext_resource type="AudioStream" uid="uid://2qntwx5j7rp4" path="res://audio/ClickSound.mp3" id="15_pkf1p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hh8vk"]
 normal = Vector2(0, 1)
@@ -110,6 +111,8 @@ position = Vector2(224, 126)
 [node name="BuildingContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(224, 126)
+
+[node name="TreatsContainer" type="Node2D" parent="."]
 
 [node name="GameManager" type="Node" parent="."]
 
@@ -336,6 +339,9 @@ autoplay = true
 parameters/looping = true
 
 [node name="SoundFX" type="AudioStreamPlayer" parent="."]
+
+[node name="TreatSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_pkf1p")
 
 [connection signal="current_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/CreatureCount" method="_on_player_stats_current_inu_count_update"]
 [connection signal="max_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_player_stats_max_inu_count_update"]

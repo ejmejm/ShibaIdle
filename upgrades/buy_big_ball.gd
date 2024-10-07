@@ -12,7 +12,7 @@ func link_dependencies(tree: SceneTree):
 func _init():
 	id = "buy_big_ball"
 	label = "Upgrade Ball"
-	description = "This increases the size of the ball and attracts shibas from farther away"
+	description = "Increases the size of the ball and attracts shibas from farther away."
 	cost = 400
 	max_purchases = 1
 	treats_to_unlock = 250

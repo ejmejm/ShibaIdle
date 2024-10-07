@@ -1,4 +1,4 @@
-class_name BuyAlienShibaUpgrade
+class_name BuyFlowerShibaUpgrade
 extends BaseUpgrade
 
 
@@ -10,16 +10,16 @@ func link_dependencies(tree: SceneTree):
 
 
 func _init():
-	id = "buy_alien_shiba"
-	label = "Attract Alien Shiba"
-	description = "Alien shibas give 8x treats per hit."
-	cost = 150
+	id = "buy_flower_shiba"
+	label = "Attract Flower Shiba"
+	description = "Flower shibas occasionally drop treats you can pickup."
+	cost = 50
 	max_purchases = -1
 	treats_to_unlock = 40
 
 
 func _on_purchase_logic():
-	spawner.spawn_inu("alien_shiba")
+	spawner.spawn_inu("flower_shiba")
 	player_stats.n_current_inus += 1
 
 
