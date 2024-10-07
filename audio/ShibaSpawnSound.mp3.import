@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://c5dmampo7ihyl"
-path="res://.godot/imported/ShibaSpawnSound.mp3-6686cd0d28f5b15742519d6f5296231b.mp3str"
+path="res://.godot/imported/ShibaSpawnSound.mp3-8eb4b7114d7e8dc3828ccf57d34fc97f.mp3str"
 
 [deps]
 
-source_file="res://Audio/ShibaSpawnSound.mp3"
-dest_files=["res://.godot/imported/ShibaSpawnSound.mp3-6686cd0d28f5b15742519d6f5296231b.mp3str"]
+source_file="res://audio/ShibaSpawnSound.mp3"
+dest_files=["res://.godot/imported/ShibaSpawnSound.mp3-8eb4b7114d7e8dc3828ccf57d34fc97f.mp3str"]
 
 [params]
 

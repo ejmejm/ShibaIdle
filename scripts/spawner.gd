@@ -24,7 +24,10 @@ func spawn_inu(inu_type: String):
 	var inu: Inu = INU_RESOURCES[inu_type].instantiate()
 	inu.visible = false
 	spawn_container.add_child(inu)
-	inu.position = inu.controller.choose_random_spot()
+	var tempos: Vector2 = Vector2(0,0)
+	while tempos.x >= -155 and tempos.x <= 155 and tempos.y >= -100 and tempos.y <=100:
+		tempos = Vector2(randi() % 2303 - 1151, randi() % 1295 - 647)
+	inu.position = tempos
 	inu.visible = true
 	
 	player_stats.creature_score += 1
