@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bfa5k0eld51ts"]
+[gd_scene load_steps=25 format=3 uid="uid://bfa5k0eld51ts"]
 
 [ext_resource type="Texture2D" uid="uid://cm0m00dsfw6xv" path="res://tilebg/LDMG.png" id="1_alsf6"]
 [ext_resource type="PackedScene" uid="uid://va8rw1sglveq" path="res://scenes/clickable_treat.tscn" id="1_osj1l"]
@@ -7,10 +7,13 @@
 [ext_resource type="Script" path="res://scripts/upgrades_manager.gd" id="5_khuaw"]
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
 [ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
+[ext_resource type="Script" path="res://scenes/buff_decay.gd" id="7_ndddy"]
 [ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
 [ext_resource type="PackedScene" uid="uid://bh8uegvyvlaad" path="res://scenes/ball.tscn" id="9_rdu7f"]
-[ext_resource type="Script" path="res://scenes/progress_bar.gd" id="10_0ld48"]
-[ext_resource type="AudioStream" uid="uid://cpu10ugppkfrf" path="res://Audio/BACKGROUND.mp3" id="11_m2gjb"]
+[ext_resource type="Script" path="res://scripts/progress_bar.gd" id="10_0ld48"]
+[ext_resource type="AudioStream" uid="uid://cpu10ugppkfrf" path="res://audio/BACKGROUND.mp3" id="11_m2gjb"]
+[ext_resource type="PackedScene" uid="uid://bxxg6tpb5nb08" path="res://scenes/gym.tscn" id="12_mq877"]
+[ext_resource type="Script" path="res://scripts/gym_building.gd" id="14_3f50p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hh8vk"]
 normal = Vector2(0, 1)
@@ -112,6 +115,11 @@ script = ExtResource("3_m3s0q")
 [node name="UpgradesManager" type="Node" parent="GameManager"]
 unique_name_in_owner = true
 script = ExtResource("5_khuaw")
+
+[node name="BuffDecay" type="Timer" parent="GameManager"]
+wait_time = 4.0
+autostart = true
+script = ExtResource("7_ndddy")
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 layer = 5
@@ -281,11 +289,17 @@ stream = ExtResource("11_m2gjb")
 autoplay = true
 parameters/looping = true
 
-[node name="SoundFX" type="AudioStreamPlayer" parent="."]
+[node name="Area2D" parent="." instance=ExtResource("12_mq877")]
+visibility_layer = 1
+position = Vector2(264, 139)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("14_3f50p")
 
 [connection signal="current_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/CreatureCount" method="_on_player_stats_current_inu_count_update"]
 [connection signal="max_inu_count_update" from="GameManager/PlayerStats" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_player_stats_max_inu_count_update"]
 [connection signal="treat_count_update" from="GameManager/PlayerStats" to="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer/ProgressBar" method="_on_player_stats_treat_count_update"]
+[connection signal="timeout" from="GameManager/BuffDecay" to="GameManager/BuffDecay" method="_on_timeout"]
 [connection signal="ready" from="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" to="UICanvas/VBoxContainer/StatsPanel/MarginContainer/CenterContainer/VBoxContainer/CreatureCountRow/MaxCreatureCount" method="_on_ready"]
 [connection signal="ready" from="UICanvas/VBoxContainer/UpgradesPanel" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_ready"]
 [connection signal="timeout" from="UICanvas/VBoxContainer/UpgradesPanel/UpgradesUpdateTimer" to="UICanvas/VBoxContainer/UpgradesPanel" method="_on_update_timer"]
