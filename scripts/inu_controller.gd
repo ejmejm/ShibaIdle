@@ -121,5 +121,6 @@ func stop_movement():
 	target_position = Vector2.ZERO
 	is_stopping = true
 	var stop_duration = randf_range(stop_duration_range.x, stop_duration_range.y)
+	stop_duration /= inu_stats.speed
 	await get_tree().create_timer(stop_duration).timeout
 	is_stopping = false
