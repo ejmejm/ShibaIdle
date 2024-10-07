@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://betxkpy8w8m4t"
-path="res://.godot/imported/ThrowBallSound.wav-f7eb1b4bbdc3100b4e6325ba78fd5fd4.sample"
+path="res://.godot/imported/ThrowBallSound.wav-60d566f86a9ee219a41b50c484d8f99c.sample"
 
 [deps]
 
-source_file="res://Audio/ThrowBallSound.wav"
-dest_files=["res://.godot/imported/ThrowBallSound.wav-f7eb1b4bbdc3100b4e6325ba78fd5fd4.sample"]
+source_file="res://audio/ThrowBallSound.wav"
+dest_files=["res://.godot/imported/ThrowBallSound.wav-60d566f86a9ee219a41b50c484d8f99c.sample"]
 
 [params]
 

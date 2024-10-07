@@ -8,11 +8,7 @@
 [ext_resource type="Script" path="res://scripts/upgrades_panel.gd" id="6_pydca"]
 [ext_resource type="Script" path="res://scripts/update_creature_count.gd" id="6_xiik3"]
 [ext_resource type="Script" path="res://scripts/max_creature_count_update.gd" id="7_sectu"]
-<<<<<<< Updated upstream
-[ext_resource type="PackedScene" uid="uid://bh8uegvyvlaad" path="res://scenes/ball.tscn" id="9_rdu7f"]
-=======
 [ext_resource type="PackedScene" uid="uid://drmon8j22sdl5" path="res://scenes/ball.tscn" id="9_rdu7f"]
->>>>>>> Stashed changes
 [ext_resource type="Script" path="res://scenes/progress_bar.gd" id="10_0ld48"]
 [ext_resource type="AudioStream" uid="uid://cpu10ugppkfrf" path="res://Audio/BACKGROUND.mp3" id="11_m2gjb"]
 
