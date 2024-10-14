@@ -329,7 +329,7 @@ layout_mode = 2
 mouse_filter = 1
 shortcut_context = NodePath("../../../../TreatsPanel/MarginContainer/TreatsHeading/VBoxContainer/HBoxContainer/TreatsCountLabel")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tebg3")
-max_value = 1e+06
+max_value = 100000.0
 script = ExtResource("10_0ld48")
 
 [node name="Label" type="Label" parent="UICanvas/ProgressbarContainer/MarginContainer/VBoxContainer"]

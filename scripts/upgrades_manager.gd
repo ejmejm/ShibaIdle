@@ -29,7 +29,7 @@ func _ready():
 		"inu_capacity_3": preload("res://upgrades/inu_capacity_3.gd").new(),
 		"inu_capacity_4": preload("res://upgrades/inu_capacity_4.gd").new(),
 		"inu_capacity_5": preload("res://upgrades/inu_capacity_5.gd").new(),
-		"inu_capacity_6": preload("res://upgrades/inu_capacity_6.gd").new(),
+		#"inu_capacity_6": preload("res://upgrades/inu_capacity_6.gd").new(),
 		"buy_space_ship": preload("res://upgrades/space_ship_upgrade.gd").new(),
 		
 		# Debugging (TODO: REMOVE FOR RELEASE!)
